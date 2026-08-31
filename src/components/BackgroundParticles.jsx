@@ -6,6 +6,11 @@ export const BackgroundParticles = () => {
   const { tier, particleLimit, prefersReducedMotion } = useDeviceCapabilities();
 
   useEffect(() => {
+    // Disable canvas particle loop completely on mobile/low-tier screens to guarantee zero main-thread scroll lag
+    if (window.innerWidth < 768 || tier === 'low' || prefersReducedMotion) {
+      return;
+    }
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -21,10 +26,7 @@ export const BackgroundParticles = () => {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas, { passive: true });
 
-    // Calculate particles based on capability & screen area
-    const width = window.innerWidth;
-    let particleCount = Math.min(particleLimit, Math.floor(width / 25));
-    if (prefersReducedMotion) particleCount = 8;
+    const particleCount = Math.min(particleLimit, Math.floor(window.innerWidth / 25));
 
     const colors = [
       'rgba(99, 102, 241, 0.22)',   // periwinkle
@@ -44,7 +46,6 @@ export const BackgroundParticles = () => {
       pulse: Math.random() * 0.015,
     }));
 
-    // Visibility Listener to pause CPU rendering when tab is hidden
     const handleVisibilityChange = () => {
       isVisible = !document.hidden;
       if (isVisible) {
@@ -90,6 +91,10 @@ export const BackgroundParticles = () => {
       cancelAnimationFrame(animationFrameId);
     };
   }, [tier, particleLimit, prefersReducedMotion]);
+
+  if (typeof window !== 'undefined' && (window.innerWidth < 768 || tier === 'low' || prefersReducedMotion)) {
+    return null;
+  }
 
   return (
     <canvas

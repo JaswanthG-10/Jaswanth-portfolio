@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles, Cpu, Code2, Database, Github, Linkedin, Mail } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
@@ -6,14 +6,25 @@ import { GlassCard } from './UI/GlassCard';
 import { StaticHeroOrb } from './StaticHeroOrb';
 import { useDeviceCapabilities } from '../hooks/useDeviceCapabilities';
 
-// Lazy-load Three.js 3D Scene so it never blocks initial critical paint on mobile
+// Lazy-load Three.js 3D Scene ONLY for tablet & desktop screens
 const Hero3DScene = lazy(() =>
   import('./Hero3DScene').then((module) => ({ default: module.Hero3DScene }))
 );
 
 export const Hero = () => {
   const { prefersReducedMotion, tier } = useDeviceCapabilities();
-  const showStaticFallback = prefersReducedMotion || tier === 'low';
+  const [isMobileScreen, setIsMobileScreen] = useState(true);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobileScreen(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile, { passive: true });
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const showStaticFallback = prefersReducedMotion || tier === 'low' || isMobileScreen;
 
   return (
     <section id="hero" className="relative min-h-[100dvh] pt-24 sm:pt-28 pb-12 sm:pb-16 flex items-center justify-center overflow-hidden">
@@ -26,10 +37,10 @@ export const Hero = () => {
             
             {/* Status Pill */}
             <motion.div
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              className="inline-flex items-center gap-2 glass-pill px-3.5 sm:px-4 py-1.5 rounded-full mb-4 text-xs font-bold text-indigo-700 border border-indigo-200/80 shadow-sm animate-float-2 max-w-full"
+              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              className="inline-flex items-center gap-2 glass-pill px-3.5 sm:px-4 py-1.5 rounded-full mb-4 text-xs font-bold text-indigo-700 border border-indigo-200/80 shadow-xs max-w-full"
             >
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping shrink-0" />
               <span className="truncate">Seeking AI/ML & Backend Internships</span>
@@ -38,9 +49,9 @@ export const Hero = () => {
 
             {/* Name & Headline */}
             <motion.h1
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.4, delay: 0.04, ease: [0.22, 1, 0.36, 1] }}
               className="text-fluid-hero font-extrabold tracking-tight text-slate-900 leading-[1.12] w-full"
             >
               Weightless Intelligence. <br className="hidden sm:inline" />
@@ -51,9 +62,9 @@ export const Hero = () => {
 
             {/* Title */}
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.4, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
               className="mt-3 sm:mt-4 text-fluid-subheading font-semibold text-slate-700 max-w-2xl"
             >
               {personalInfo.role}
@@ -61,9 +72,9 @@ export const Hero = () => {
 
             {/* Short Intro */}
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.4, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
               className="mt-3 text-fluid-body text-slate-500 max-w-xl leading-relaxed"
             >
               {personalInfo.shortBio} Combining core AI/ML concepts with REST APIs, databases, vector retrieval, authentication, and modern web interfaces into end-to-end intelligent applications.
@@ -71,9 +82,9 @@ export const Hero = () => {
 
             {/* CTAs */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.4, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
               className="mt-6 sm:mt-8 flex flex-wrap items-center gap-3 w-full sm:w-auto"
             >
               <a
@@ -86,7 +97,7 @@ export const Hero = () => {
 
               <a
                 href="#contact"
-                className="w-full sm:w-auto glass-pill px-6 py-3 sm:py-3.5 rounded-full font-semibold text-xs sm:text-sm text-slate-700 bg-white/70 hover:bg-white hover:text-indigo-600 border border-white/90 shadow-sm transition-all duration-300 flex items-center justify-center min-h-[44px]"
+                className="w-full sm:w-auto glass-pill px-6 py-3 sm:py-3.5 rounded-full font-semibold text-xs sm:text-sm text-slate-700 bg-white/70 hover:bg-white hover:text-indigo-600 border border-white/90 shadow-xs transition-all duration-300 flex items-center justify-center min-h-[44px]"
               >
                 Get In Touch
               </a>
@@ -94,9 +105,9 @@ export const Hero = () => {
 
             {/* Social Links */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.4, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
               className="mt-6 flex items-center gap-3"
             >
               <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Connect:</span>
@@ -129,9 +140,9 @@ export const Hero = () => {
 
             {/* Technical Badges */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.4, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
               className="mt-8 flex flex-wrap items-center gap-2 pt-4 border-t border-slate-200/50 w-full"
             >
               <div className="flex items-center gap-1.5 text-[11px] sm:text-xs font-semibold text-slate-600 bg-white/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/80 shadow-2xs">
@@ -150,7 +161,7 @@ export const Hero = () => {
 
           </div>
 
-          {/* Right Column: Lazy-Loaded 3D Visual Centerpiece */}
+          {/* Right Column: Visual Centerpiece (Static Orb on mobile, WebGL on desktop) */}
           <div className="lg:col-span-5 relative flex flex-col items-center justify-center mt-6 lg:mt-0">
             
             <div className="absolute inset-0 bg-gradient-to-tr from-indigo-200/30 via-purple-200/20 to-sky-200/30 rounded-full blur-3xl -z-10 transform scale-110 pointer-events-none" />
