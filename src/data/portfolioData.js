@@ -1,3 +1,12 @@
+export const navLinks = [
+  { name: "About", href: "#about" },
+  { name: "Skills", href: "#skills" },
+  { name: "Projects", href: "#projects" },
+  { name: "Experience", href: "#experience" },
+  { name: "Education", href: "#education" },
+  { name: "Contact", href: "#contact" },
+];
+
 export const personalInfo = {
   name: "Jaswanth G.",
   fullName: "Jaswanth G",
@@ -102,7 +111,7 @@ export const projectsData = [
     title: "Iris AI — Document Intelligence Platform",
     tagline: "Flagship RAG Platform with Source & Page-Aware Retrieval",
     isFlagship: true,
-    glyph: "FileText", // Document/scan glyph
+    glyph: "FileText",
     category: "AI/ML & RAG",
     problem: "Users need a faster way to understand and query information in complex documents without manual, time-consuming searches.",
     engineeringApproach: "Built an AI-powered platform ingesting PDF/DOCX/TXT files with OCR, semantic chunking, vector embeddings, and a RAG pipeline featuring source and page-aware citation retrieval backed by JWT authentication.",
@@ -124,7 +133,7 @@ export const projectsData = [
     title: "Lumina AI — Movie Recommendation System",
     tagline: "Content-Based Recommendation Engine via Vector Similarity",
     isFlagship: false,
-    glyph: "Film", // Film-reel glyph
+    glyph: "Film",
     category: "AI/ML",
     problem: "Movie discovery is inefficient without personalized or similarity-based content guidance.",
     engineeringApproach: "Engineered a content-based recommendation algorithm utilizing cosine similarity over feature vectors, presented through an interactive discovery interface with metadata, ratings, and recommendations.",
@@ -145,7 +154,7 @@ export const projectsData = [
     title: "FixIt — Campus Issue Reporting & Tracking Platform",
     tagline: "Role: Backend Developer | Full-Lifecycle Issue Management System",
     isFlagship: false,
-    glyph: "CheckSquare", // Checklist/ticket glyph
+    glyph: "CheckSquare",
     category: "Backend Engineering",
     problem: "Campus issues are hard to report, prioritize, and resolve when communication across departments is fragmented.",
     engineeringApproach: "Served as the Backend Developer on a collaborative platform for issue reporting, status tracking, upvoting, and an admin dashboard for priority management.",
@@ -166,7 +175,7 @@ export const projectsData = [
     title: "Bank Management System",
     tagline: "Desktop Banking Application with GUI & Relational Database",
     isFlagship: false,
-    glyph: "Landmark", // Bank/ledger glyph
+    glyph: "Landmark",
     category: "Desktop & Database",
     problem: "Basic banking workflows require structured relational storage, transaction handling, and a usable desktop interface.",
     engineeringApproach: "Developed a desktop banking application connecting a Python graphical interface to a relational MySQL database for account-management operations and secure transaction logging.",
