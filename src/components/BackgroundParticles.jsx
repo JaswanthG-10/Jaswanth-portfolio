@@ -11,31 +11,42 @@ export const BackgroundParticles = () => {
     let animationFrameId;
 
     const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
     };
 
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Particle pool setup with pastel tones
-    const particleCount = Math.min(Math.floor(window.innerWidth / 25), 45);
+    // Responsive particle count calculation
+    const width = window.innerWidth;
+    let particleCount = 35;
+    if (width < 480) {
+      particleCount = 12;
+    } else if (width < 768) {
+      particleCount = 20;
+    } else if (width < 1024) {
+      particleCount = 28;
+    }
+
     const colors = [
-      'rgba(99, 102, 241, 0.25)',   // periwinkle
-      'rgba(139, 92, 246, 0.25)',  // soft violet
-      'rgba(14, 165, 233, 0.25)',  // sky aqua
-      'rgba(16, 185, 129, 0.2)',   // soft mint
+      'rgba(99, 102, 241, 0.22)',   // periwinkle
+      'rgba(139, 92, 246, 0.22)',  // soft violet
+      'rgba(14, 165, 233, 0.22)',  // sky aqua
+      'rgba(16, 185, 129, 0.18)',  // soft mint
     ];
 
     const particles = Array.from({ length: particleCount }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
-      radius: Math.random() * 3 + 1.5,
+      radius: Math.random() * 2.5 + 1,
       color: colors[Math.floor(Math.random() * colors.length)],
-      vy: -(Math.random() * 0.4 + 0.1), // Slow float upward
-      vx: (Math.random() - 0.5) * 0.2,   // Horizontal sway
-      alpha: Math.random() * 0.6 + 0.2,
-      pulse: Math.random() * 0.02,
+      vy: -(Math.random() * 0.3 + 0.08), // Gentle float upward
+      vx: (Math.random() - 0.5) * 0.15,
+      alpha: Math.random() * 0.5 + 0.2,
+      pulse: Math.random() * 0.015,
     }));
 
     const render = () => {
@@ -46,7 +57,7 @@ export const BackgroundParticles = () => {
         p.x += p.vx;
         p.alpha += Math.sin(Date.now() * 0.001) * p.pulse;
 
-        // Wrap around top boundary
+        // Wrap boundaries
         if (p.y < -10) {
           p.y = canvas.height + 10;
           p.x = Math.random() * canvas.width;
@@ -58,12 +69,6 @@ export const BackgroundParticles = () => {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         ctx.fillStyle = p.color;
-        ctx.fill();
-
-        // Soft ambient aura
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius * 2.5, 0, Math.PI * 2);
-        ctx.fillStyle = p.color.replace('0.25', '0.08').replace('0.2', '0.06');
         ctx.fill();
       });
 
@@ -81,8 +86,8 @@ export const BackgroundParticles = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0"
-      style={{ opacity: 0.85 }}
+      className="fixed inset-0 pointer-events-none z-0 max-w-full overflow-hidden"
+      style={{ opacity: 0.8 }}
     />
   );
 };

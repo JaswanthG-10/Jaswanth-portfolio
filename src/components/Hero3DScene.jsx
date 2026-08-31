@@ -8,59 +8,56 @@ export const Hero3DScene = () => {
     const container = mountRef.current;
     if (!container) return;
 
-    // Scene setup
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+    const isMobile = window.innerWidth < 768;
+
+    // Scene
     const scene = new THREE.Scene();
     
-    // Camera
-    const camera = new THREE.PerspectiveCamera(
-      45,
-      container.clientWidth / container.clientHeight,
-      0.1,
-      1000
-    );
-    camera.position.z = 15;
+    // Viewport-based camera configuration
+    const fov = isMobile ? 55 : 45;
+    const camera = new THREE.PerspectiveCamera(fov, width / height, 0.1, 1000);
+    camera.position.z = isMobile ? 18 : 15;
 
-    // Renderer
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    // Renderer with capped DPR for mobile performance
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: !isMobile });
+    renderer.setSize(width, height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.25 : 2));
     container.appendChild(renderer.domElement);
 
-    // Ambient & Directional Lights for Glass Refraction effect
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
+    // Ambient & Directional Lights
+    const ambientLight = new THREE.AmbientLight(0xffffff, isMobile ? 1.4 : 1.2);
     scene.add(ambientLight);
 
-    const dirLight1 = new THREE.DirectionalLight(0x8b5cf6, 2.5); // Pastel violet
+    const dirLight1 = new THREE.DirectionalLight(0x8b5cf6, isMobile ? 2.0 : 2.5);
     dirLight1.position.set(10, 15, 10);
     scene.add(dirLight1);
 
-    const dirLight2 = new THREE.DirectionalLight(0x0ea5e9, 2.0); // Soft aqua
+    const dirLight2 = new THREE.DirectionalLight(0x0ea5e9, isMobile ? 1.5 : 2.0);
     dirLight2.position.set(-10, -10, 10);
     scene.add(dirLight2);
 
-    const pointLight = new THREE.PointLight(0x6366f1, 3, 20); // Periwinkle core glow
-    pointLight.position.set(0, 0, 2);
-    scene.add(pointLight);
+    // Scale Factor based on device size
+    const scaleFactor = isMobile ? 0.75 : 1.0;
 
     // Core Translucent Glass Sphere
-    const sphereGeo = new THREE.SphereGeometry(2.4, 64, 64);
+    const sphereGeo = new THREE.SphereGeometry(2.4 * scaleFactor, isMobile ? 32 : 64, isMobile ? 32 : 64);
     const sphereMat = new THREE.MeshPhysicalMaterial({
       color: 0xe8f1ff,
       transmission: 0.85,
       opacity: 0.9,
       transparent: true,
-      roughness: 0.1,
+      roughness: 0.15,
       metalness: 0.1,
       ior: 1.4,
-      thickness: 1.2,
-      clearcoat: 1,
-      clearcoatRoughness: 0.1,
+      thickness: 1.2 * scaleFactor,
     });
     const coreSphere = new THREE.Mesh(sphereGeo, sphereMat);
     scene.add(coreSphere);
 
-    // Inner Glowing Polyhedron Core
-    const innerGeo = new THREE.IcosahedronGeometry(1.4, 0);
+    // Inner Wireframe Core
+    const innerGeo = new THREE.IcosahedronGeometry(1.4 * scaleFactor, 0);
     const innerMat = new THREE.MeshStandardMaterial({
       color: 0x8b5cf6,
       wireframe: true,
@@ -70,20 +67,20 @@ export const Hero3DScene = () => {
     const innerCore = new THREE.Mesh(innerGeo, innerMat);
     scene.add(innerCore);
 
-    // Orbiting Satellite 1: Thin Glass Torus Ring 1
-    const ring1Geo = new THREE.TorusGeometry(4.2, 0.08, 16, 100);
+    // Orbiting Torus Ring 1
+    const ring1Geo = new THREE.TorusGeometry(4.2 * scaleFactor, 0.07 * scaleFactor, 16, isMobile ? 60 : 100);
     const ring1Mat = new THREE.MeshStandardMaterial({
       color: 0x6366f1,
-      roughness: 0.2,
-      metalness: 0.8,
+      roughness: 0.25,
+      metalness: 0.7,
     });
     const ring1 = new THREE.Mesh(ring1Geo, ring1Mat);
     ring1.rotation.x = Math.PI / 3;
     ring1.rotation.y = Math.PI / 6;
     scene.add(ring1);
 
-    // Orbiting Satellite 2: Thin Glass Torus Ring 2 (Cross orbit)
-    const ring2Geo = new THREE.TorusGeometry(5.4, 0.06, 16, 100);
+    // Orbiting Torus Ring 2
+    const ring2Geo = new THREE.TorusGeometry(5.4 * scaleFactor, 0.05 * scaleFactor, 16, isMobile ? 60 : 100);
     const ring2Mat = new THREE.MeshStandardMaterial({
       color: 0x0ea5e9,
       roughness: 0.3,
@@ -94,58 +91,65 @@ export const Hero3DScene = () => {
     ring2.rotation.y = -Math.PI / 3;
     scene.add(ring2);
 
-    // Small Floating Geometric Satellites
+    // Floating Geometric Satellites
     const satellitesGroup = new THREE.Group();
     
     // Sat A: Octahedron
-    const satAGeo = new THREE.OctahedronGeometry(0.5);
+    const satAGeo = new THREE.OctahedronGeometry(0.45 * scaleFactor);
     const satAMat = new THREE.MeshStandardMaterial({ color: 0xa855f7, roughness: 0.2 });
     const satA = new THREE.Mesh(satAGeo, satAMat);
-    satA.position.set(4.5, 1.8, 1);
+    satA.position.set(4.2 * scaleFactor, 1.8 * scaleFactor, 1);
     satellitesGroup.add(satA);
 
     // Sat B: Small Translucent Sphere
-    const satBGeo = new THREE.SphereGeometry(0.4, 32, 32);
+    const satBGeo = new THREE.SphereGeometry(0.35 * scaleFactor, 16, 16);
     const satBMat = new THREE.MeshPhysicalMaterial({
       color: 0x38bdf8,
       transmission: 0.9,
       transparent: true,
-      roughness: 0.15,
+      roughness: 0.2,
     });
     const satB = new THREE.Mesh(satBGeo, satBMat);
-    satB.position.set(-4.2, -2.2, 1.5);
+    satB.position.set(-3.8 * scaleFactor, -2.0 * scaleFactor, 1.2);
     satellitesGroup.add(satB);
 
-    // Sat C: Dodecahedron
-    const satCGeo = new THREE.DodecahedronGeometry(0.45);
-    const satCMat = new THREE.MeshStandardMaterial({ color: 0x10b981, roughness: 0.3 });
-    const satC = new THREE.Mesh(satCGeo, satCMat);
-    satC.position.set(2.8, -3.5, -1);
-    satellitesGroup.add(satC);
+    if (!isMobile) {
+      // Sat C: Dodecahedron (Only on Tablet & Desktop)
+      const satCGeo = new THREE.DodecahedronGeometry(0.4 * scaleFactor);
+      const satCMat = new THREE.MeshStandardMaterial({ color: 0x10b981, roughness: 0.3 });
+      const satC = new THREE.Mesh(satCGeo, satCMat);
+      satC.position.set(2.5 * scaleFactor, -3.2 * scaleFactor, -1);
+      satellitesGroup.add(satC);
+    }
 
     scene.add(satellitesGroup);
 
-    // Mouse Tracking for Parallax Drift
+    // Parallax tracking
     let mouseX = 0;
     let mouseY = 0;
     let targetX = 0;
     let targetY = 0;
 
     const handleMouseMove = (event) => {
+      if (isMobile) return;
       const windowHalfX = window.innerWidth / 2;
       const windowHalfY = window.innerHeight / 2;
-      mouseX = (event.clientX - windowHalfX) * 0.0008;
-      mouseY = (event.clientY - windowHalfY) * 0.0008;
+      mouseX = (event.clientX - windowHalfX) * 0.0006;
+      mouseY = (event.clientY - windowHalfY) * 0.0006;
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    if (!isMobile) {
+      window.addEventListener('mousemove', handleMouseMove);
+    }
 
     // Resize Handler
     const handleResize = () => {
       if (!container) return;
-      camera.aspect = container.clientWidth / container.clientHeight;
+      const newWidth = container.clientWidth;
+      const newHeight = container.clientHeight;
+      camera.aspect = newWidth / newHeight;
       camera.updateProjectionMatrix();
-      renderer.setSize(container.clientWidth, container.clientHeight);
+      renderer.setSize(newWidth, newHeight);
     };
 
     window.addEventListener('resize', handleResize);
@@ -159,29 +163,24 @@ export const Hero3DScene = () => {
 
       const elapsedTime = clock.getElapsedTime();
 
-      // Gentle smooth damping mouse movement
       targetX += (mouseX - targetX) * 0.05;
       targetY += (mouseY - targetY) * 0.05;
 
-      // Rotate objects
-      coreSphere.rotation.y = elapsedTime * 0.15;
-      coreSphere.rotation.x = Math.sin(elapsedTime * 0.2) * 0.1;
+      coreSphere.rotation.y = elapsedTime * 0.12;
+      coreSphere.rotation.x = Math.sin(elapsedTime * 0.15) * 0.08;
 
-      innerCore.rotation.y = -elapsedTime * 0.4;
-      innerCore.rotation.z = elapsedTime * 0.2;
+      innerCore.rotation.y = -elapsedTime * 0.3;
+      innerCore.rotation.z = elapsedTime * 0.15;
 
-      ring1.rotation.z = elapsedTime * 0.25;
-      ring2.rotation.z = -elapsedTime * 0.2;
+      ring1.rotation.z = elapsedTime * 0.2;
+      ring2.rotation.z = -elapsedTime * 0.18;
 
-      satellitesGroup.rotation.y = elapsedTime * 0.3;
-      satellitesGroup.rotation.x = Math.sin(elapsedTime * 0.25) * 0.15;
+      satellitesGroup.rotation.y = elapsedTime * 0.25;
 
-      satA.rotation.x = elapsedTime * 0.8;
-      satC.rotation.y = elapsedTime * 0.6;
-
-      // Apply camera parallax drift
-      camera.position.x = targetX * 8;
-      camera.position.y = -targetY * 8;
+      if (!isMobile) {
+        camera.position.x = targetX * 6;
+        camera.position.y = -targetY * 6;
+      }
       camera.lookAt(scene.position);
 
       renderer.render(scene, camera);
@@ -190,7 +189,9 @@ export const Hero3DScene = () => {
     animate();
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
+      if (!isMobile) {
+        window.removeEventListener('mousemove', handleMouseMove);
+      }
       window.removeEventListener('resize', handleResize);
       cancelAnimationFrame(animationFrameId);
       if (container.contains(renderer.domElement)) {
@@ -203,7 +204,7 @@ export const Hero3DScene = () => {
   return (
     <div
       ref={mountRef}
-      className="w-full h-[380px] sm:h-[480px] lg:h-[550px] relative z-10 cursor-grab active:cursor-grabbing"
+      className="w-full h-[260px] xs:h-[300px] sm:h-[400px] md:h-[480px] lg:h-[540px] relative z-10 mx-auto max-w-full overflow-hidden"
     />
   );
 };

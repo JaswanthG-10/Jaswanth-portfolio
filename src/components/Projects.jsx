@@ -18,26 +18,26 @@ export const Projects = () => {
   const getGlyphIcon = (glyphName) => {
     switch (glyphName) {
       case 'FileText':
-        return <FileText className="w-6 h-6 text-indigo-600" />;
+        return <FileText className="w-5 h-5 sm:w-6 sm:h-6 text-indigo-600" />;
       case 'Film':
-        return <Film className="w-6 h-6 text-purple-600" />;
+        return <Film className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600" />;
       case 'CheckSquare':
-        return <CheckSquare className="w-6 h-6 text-sky-600" />;
+        return <CheckSquare className="w-5 h-5 sm:w-6 sm:h-6 text-sky-600" />;
       case 'Landmark':
-        return <Landmark className="w-6 h-6 text-teal-600" />;
+        return <Landmark className="w-5 h-5 sm:w-6 sm:h-6 text-teal-600" />;
       default:
-        return <FileText className="w-6 h-6 text-indigo-600" />;
+        return <FileText className="w-5 h-5 sm:w-6 sm:h-6 text-indigo-600" />;
     }
   };
 
   return (
-    <section id="projects" className="py-24 relative z-10">
+    <section id="projects" className="py-16 sm:py-24 relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
@@ -47,32 +47,32 @@ export const Projects = () => {
             <span>Featured Engineering Work</span>
           </motion.div>
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight"
+            transition={{ duration: 0.5, delay: 0.05 }}
+            className="text-fluid-heading font-extrabold text-slate-900 tracking-tight"
           >
             Floating <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-sky-500 bg-clip-text text-transparent">Glass Project Cards</span>
           </motion.h2>
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.15 }}
-            className="mt-3 text-slate-500 text-sm sm:text-base max-w-xl mx-auto"
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="mt-3 text-fluid-body text-slate-500 max-w-lg mx-auto"
           >
-            Detailed technical breakdown: Problem Statement → Engineering Approach → Tech Stack → Capability Demonstrated.
+            Detailed technical architecture: Problem Statement → Engineering Approach → Tech Stack → Capability Demonstrated.
           </motion.p>
         </div>
 
         {/* Filter Pills */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
+        <div className="flex flex-wrap items-center justify-center gap-2 mb-10 sm:mb-12 max-w-full overflow-x-auto pb-2">
           {categories.map((cat, idx) => (
             <button
               key={idx}
               onClick={() => setFilterCategory(cat)}
-              className={`glass-pill px-4 py-2 rounded-full text-xs font-bold transition-all duration-300 ${
+              className={`glass-pill px-3.5 sm:px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 min-h-[40px] flex items-center justify-center ${
                 filterCategory === cat
                   ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-md border-transparent scale-105'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-white/80'
@@ -84,38 +84,37 @@ export const Projects = () => {
         </div>
 
         {/* Projects Grid */}
-        <div className="space-y-8">
+        <div className="space-y-6 sm:space-y-8">
           {filteredProjects.map((project, index) => {
             const isFlagship = project.isFlagship;
 
             return (
               <motion.div
                 key={project.id}
-                initial={{ opacity: 0, y: 40, rotateX: 12 }}
-                whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-                viewport={{ once: true, margin: '-50px' }}
-                transition={{ duration: 0.7, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.6, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
               >
                 <GlassCard
-                  className={`p-6 sm:p-8 lg:p-10 rounded-3xl shadow-glass border-white/90 relative overflow-hidden transition-all duration-300 ${
+                  className={`p-5 sm:p-8 lg:p-10 rounded-3xl shadow-glass border-white/90 relative overflow-hidden transition-all duration-300 ${
                     isFlagship ? 'ring-2 ring-indigo-400/40 bg-white/75' : ''
                   }`}
                   floatClass={index % 2 === 0 ? 'animate-float-1' : 'animate-float-3'}
                 >
                   
-                  {/* Subtle Glow backdrop for flagship */}
+                  {/* Glow backdrop */}
                   {isFlagship && (
-                    <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-indigo-200/40 via-purple-100/30 to-transparent rounded-full blur-3xl -z-10" />
+                    <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-indigo-200/30 via-purple-100/20 to-transparent rounded-full blur-3xl -z-10" />
                   )}
 
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
                     
-                    {/* Project Left Header Info */}
+                    {/* Project Header Column */}
                     <div className="lg:col-span-4 flex flex-col justify-between h-full">
                       <div>
-                        {/* Project Category & Glyph Header */}
-                        <div className="flex items-center gap-3 mb-4">
-                          <div className="w-12 h-12 rounded-2xl bg-white/90 backdrop-blur-md border border-slate-200/80 flex items-center justify-center shadow-sm">
+                        <div className="flex items-center gap-3 mb-3">
+                          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-white/90 backdrop-blur-md border border-slate-200/80 flex items-center justify-center shadow-xs shrink-0">
                             {getGlyphIcon(project.glyph)}
                           </div>
                           <div>
@@ -132,7 +131,7 @@ export const Projects = () => {
                           </div>
                         </div>
 
-                        <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                        <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">
                           {project.title}
                         </h3>
 
@@ -142,10 +141,10 @@ export const Projects = () => {
                       </div>
 
                       {/* Action Buttons */}
-                      <div className="mt-8 flex flex-wrap items-center gap-3">
+                      <div className="mt-6 sm:mt-8 flex flex-wrap items-center gap-3">
                         <button
                           onClick={() => setSelectedProject(project)}
-                          className="glass-pill px-5 py-2.5 rounded-full text-xs font-bold text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 shadow-md flex items-center gap-2 transition-all hover:-translate-y-0.5"
+                          className="glass-pill px-4 sm:px-5 py-2.5 rounded-full text-xs font-bold text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 shadow-md flex items-center gap-1.5 transition-all min-h-[44px]"
                         >
                           <Info className="w-4 h-4" /> Deep Dive Details
                         </button>
@@ -153,7 +152,7 @@ export const Projects = () => {
                           href={project.links.github}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="glass-pill p-2.5 rounded-full text-slate-700 hover:text-indigo-600 hover:bg-white shadow-sm border border-slate-200"
+                          className="glass-pill p-2.5 rounded-full text-slate-700 hover:text-indigo-600 hover:bg-white shadow-xs border border-slate-200 min-w-[44px] min-h-[44px] flex items-center justify-center"
                           aria-label="View Code on GitHub"
                         >
                           <Github className="w-4 h-4" />
@@ -162,13 +161,13 @@ export const Projects = () => {
 
                     </div>
 
-                    {/* Project Right Content: 4-Part Structure */}
-                    <div className="lg:col-span-8 space-y-4">
+                    {/* Project 4-Part Structure Column */}
+                    <div className="lg:col-span-8 space-y-3 sm:space-y-4">
                       
                       {/* 1. Problem Statement */}
-                      <div className="p-4 rounded-2xl bg-white/70 backdrop-blur-md border border-slate-200/60 shadow-sm">
-                        <h4 className="text-[11px] font-extrabold uppercase text-slate-500 tracking-wider mb-1 flex items-center gap-2">
-                          <span className="w-2 h-2 rounded-full bg-rose-500" /> 1. Problem Statement
+                      <div className="p-3.5 sm:p-4 rounded-2xl bg-white/70 backdrop-blur-md border border-slate-200/60 shadow-2xs">
+                        <h4 className="text-[10px] sm:text-[11px] font-extrabold uppercase text-slate-500 tracking-wider mb-1 flex items-center gap-2">
+                          <span className="w-2 h-2 rounded-full bg-rose-500 shrink-0" /> 1. Problem Statement
                         </h4>
                         <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
                           {project.problem}
@@ -176,9 +175,9 @@ export const Projects = () => {
                       </div>
 
                       {/* 2. Engineering Approach */}
-                      <div className="p-4 rounded-2xl bg-indigo-50/70 backdrop-blur-md border border-indigo-100 shadow-sm">
-                        <h4 className="text-[11px] font-extrabold uppercase text-indigo-700 tracking-wider mb-1 flex items-center gap-2">
-                          <Cpu className="w-3.5 h-3.5 text-indigo-600" /> 2. Engineering Approach
+                      <div className="p-3.5 sm:p-4 rounded-2xl bg-indigo-50/70 backdrop-blur-md border border-indigo-100 shadow-2xs">
+                        <h4 className="text-[10px] sm:text-[11px] font-extrabold uppercase text-indigo-700 tracking-wider mb-1 flex items-center gap-1.5">
+                          <Cpu className="w-3.5 h-3.5 text-indigo-600 shrink-0" /> 2. Engineering Approach
                         </h4>
                         <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
                           {project.engineeringApproach}
@@ -186,15 +185,15 @@ export const Projects = () => {
                       </div>
 
                       {/* 3. Tech Stack */}
-                      <div className="p-4 rounded-2xl bg-white/70 backdrop-blur-md border border-slate-200/60 shadow-sm">
-                        <h4 className="text-[11px] font-extrabold uppercase text-slate-500 tracking-wider mb-2">
+                      <div className="p-3.5 sm:p-4 rounded-2xl bg-white/70 backdrop-blur-md border border-slate-200/60 shadow-2xs">
+                        <h4 className="text-[10px] sm:text-[11px] font-extrabold uppercase text-slate-500 tracking-wider mb-2">
                           3. Tech Stack
                         </h4>
                         <div className="flex flex-wrap gap-1.5">
                           {project.techStack.map((tech, tIdx) => (
                             <span
                               key={tIdx}
-                              className="glass-pill px-2.5 py-1 rounded-lg text-[11px] font-bold text-slate-700 bg-white/90 border-slate-200 shadow-2xs"
+                              className="glass-pill px-2.5 py-0.5 rounded-lg text-[10px] sm:text-[11px] font-bold text-slate-700 bg-white/90 border-slate-200 shadow-2xs min-h-[30px]"
                             >
                               {tech}
                             </span>
@@ -203,9 +202,9 @@ export const Projects = () => {
                       </div>
 
                       {/* 4. Capability Demonstrated */}
-                      <div className="p-4 rounded-2xl bg-purple-50/70 backdrop-blur-md border border-purple-100 shadow-sm">
-                        <h4 className="text-[11px] font-extrabold uppercase text-purple-700 tracking-wider mb-1 flex items-center gap-2">
-                          <Layers className="w-3.5 h-3.5 text-purple-600" /> 4. Capability Demonstrated
+                      <div className="p-3.5 sm:p-4 rounded-2xl bg-purple-50/70 backdrop-blur-md border border-purple-100 shadow-2xs">
+                        <h4 className="text-[10px] sm:text-[11px] font-extrabold uppercase text-purple-700 tracking-wider mb-1 flex items-center gap-1.5">
+                          <Layers className="w-3.5 h-3.5 text-purple-600 shrink-0" /> 4. Capability Demonstrated
                         </h4>
                         <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed">
                           {project.capabilityDemonstrated}
