@@ -3,22 +3,23 @@ import { motion } from 'framer-motion';
 import { Code2, Cpu, Hammer, Rocket } from 'lucide-react';
 import { skillsData } from '../data/portfolioData';
 import { GlassCard } from './UI/GlassCard';
+import { useIntersectionAnimation } from '../hooks/useIntersectionAnimation';
 
 export const Skills = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const { ref: sectionRef, isVisible } = useIntersectionAnimation({ threshold: 0.05 });
 
   const categoriesList = ['All', ...skillsData.categories.map(c => c.name)];
 
   return (
-    <section id="skills" className="py-16 sm:py-24 relative z-10">
+    <section id="skills" ref={sectionRef} className="py-16 sm:py-24 relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
             transition={{ duration: 0.5 }}
             className="inline-flex items-center gap-2 glass-pill px-4 py-1.5 rounded-full text-xs font-bold text-indigo-700 mb-3 border border-indigo-100"
           >
@@ -27,8 +28,7 @@ export const Skills = () => {
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
             transition={{ duration: 0.5, delay: 0.05 }}
             className="text-fluid-heading font-extrabold text-slate-900 tracking-tight"
           >
@@ -36,8 +36,7 @@ export const Skills = () => {
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             className="mt-3 text-fluid-body text-slate-500 max-w-lg mx-auto"
           >
@@ -45,7 +44,7 @@ export const Skills = () => {
           </motion.p>
         </div>
 
-        {/* Category Filter Pills (Responsive Wrap & Minimum 44px tap targets) */}
+        {/* Category Filter Pills */}
         <div className="flex flex-wrap items-center justify-center gap-2 mb-10 sm:mb-12 max-w-full overflow-x-auto pb-2">
           {categoriesList.map((cat, idx) => (
             <button
@@ -62,48 +61,39 @@ export const Skills = () => {
           ))}
         </div>
 
-        {/* Orbit Clusters Responsive Grid */}
+        {/* Orbit Clusters Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-12 sm:mb-16">
           {skillsData.categories
             .filter(cat => selectedCategory === 'All' || cat.name === selectedCategory)
             .map((catGroup, index) => (
-              <motion.div
+              <GlassCard
                 key={catGroup.name}
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                delay={index * 60}
+                className="p-5 sm:p-6 rounded-3xl h-full shadow-glass border-white/80 hover:border-indigo-200"
               >
-                <GlassCard className="p-5 sm:p-6 rounded-3xl h-full shadow-glass border-white/80 hover:border-indigo-200">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className={`w-8 h-8 rounded-xl bg-gradient-to-tr ${catGroup.color} flex items-center justify-center text-white text-xs font-bold shadow-xs shrink-0`}>
-                      <Code2 className="w-4 h-4" />
-                    </div>
-                    <h3 className="text-base font-bold text-slate-900">{catGroup.name}</h3>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className={`w-8 h-8 rounded-xl bg-gradient-to-tr ${catGroup.color} flex items-center justify-center text-white text-xs font-bold shadow-xs shrink-0`}>
+                    <Code2 className="w-4 h-4" />
                   </div>
+                  <h3 className="text-base font-bold text-slate-900">{catGroup.name}</h3>
+                </div>
 
-                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                    {catGroup.skills.map((skill, sIdx) => (
-                      <span
-                        key={sIdx}
-                        className="glass-pill px-3 py-1 rounded-xl text-xs font-semibold text-slate-700 bg-white/80 border-white/90 shadow-2xs"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </GlassCard>
-              </motion.div>
+                <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                  {catGroup.skills.map((skill, sIdx) => (
+                    <span
+                      key={sIdx}
+                      className="glass-pill px-3 py-1 rounded-xl text-xs font-semibold text-slate-700 bg-white/80 border-white/90 shadow-2xs"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </GlassCard>
             ))}
         </div>
 
         {/* DISTINCT "Currently Building" GLASS TRAY */}
-        <motion.div
-          initial={{ opacity: 0, y: 25 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        >
+        <GlassCard delay={200} floatAnimation={false} className="p-0 overflow-hidden">
           <div className="glass-tray-building p-6 sm:p-8 lg:p-10 rounded-3xl relative overflow-hidden">
             
             {/* Header Badge */}
@@ -150,7 +140,7 @@ export const Skills = () => {
             </div>
 
           </div>
-        </motion.div>
+        </GlassCard>
 
       </div>
     </section>

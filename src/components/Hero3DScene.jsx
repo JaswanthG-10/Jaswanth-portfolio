@@ -1,8 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
+import { useDeviceCapabilities } from '../hooks/useDeviceCapabilities';
 
 export const Hero3DScene = () => {
   const mountRef = useRef(null);
+  const { isTouch, tier, maxDpr } = useDeviceCapabilities();
 
   useEffect(() => {
     const container = mountRef.current;
@@ -12,21 +14,24 @@ export const Hero3DScene = () => {
     const height = container.clientHeight;
     const isMobile = window.innerWidth < 768;
 
-    // Scene
+    let isCanvasVisible = true;
+    let isTabVisible = true;
+
+    // Scene setup
     const scene = new THREE.Scene();
     
-    // Viewport-based camera configuration
+    // Viewport camera configuration
     const fov = isMobile ? 55 : 45;
     const camera = new THREE.PerspectiveCamera(fov, width / height, 0.1, 1000);
     camera.position.z = isMobile ? 18 : 15;
 
-    // Renderer with capped DPR for mobile performance
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: !isMobile });
+    // WebGL Renderer
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: tier !== 'low' });
     renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.25 : 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, maxDpr));
     container.appendChild(renderer.domElement);
 
-    // Ambient & Directional Lights
+    // Lights
     const ambientLight = new THREE.AmbientLight(0xffffff, isMobile ? 1.4 : 1.2);
     scene.add(ambientLight);
 
@@ -38,14 +43,13 @@ export const Hero3DScene = () => {
     dirLight2.position.set(-10, -10, 10);
     scene.add(dirLight2);
 
-    // Scale Factor based on device size
     const scaleFactor = isMobile ? 0.75 : 1.0;
 
     // Core Translucent Glass Sphere
-    const sphereGeo = new THREE.SphereGeometry(2.4 * scaleFactor, isMobile ? 32 : 64, isMobile ? 32 : 64);
+    const sphereGeo = new THREE.SphereGeometry(2.4 * scaleFactor, tier === 'low' ? 24 : 48, tier === 'low' ? 24 : 48);
     const sphereMat = new THREE.MeshPhysicalMaterial({
       color: 0xe8f1ff,
-      transmission: 0.85,
+      transmission: tier === 'low' ? 0.6 : 0.85,
       opacity: 0.9,
       transparent: true,
       roughness: 0.15,
@@ -68,7 +72,7 @@ export const Hero3DScene = () => {
     scene.add(innerCore);
 
     // Orbiting Torus Ring 1
-    const ring1Geo = new THREE.TorusGeometry(4.2 * scaleFactor, 0.07 * scaleFactor, 16, isMobile ? 60 : 100);
+    const ring1Geo = new THREE.TorusGeometry(4.2 * scaleFactor, 0.07 * scaleFactor, 16, tier === 'low' ? 40 : 80);
     const ring1Mat = new THREE.MeshStandardMaterial({
       color: 0x6366f1,
       roughness: 0.25,
@@ -80,7 +84,7 @@ export const Hero3DScene = () => {
     scene.add(ring1);
 
     // Orbiting Torus Ring 2
-    const ring2Geo = new THREE.TorusGeometry(5.4 * scaleFactor, 0.05 * scaleFactor, 16, isMobile ? 60 : 100);
+    const ring2Geo = new THREE.TorusGeometry(5.4 * scaleFactor, 0.05 * scaleFactor, 16, tier === 'low' ? 40 : 80);
     const ring2Mat = new THREE.MeshStandardMaterial({
       color: 0x0ea5e9,
       roughness: 0.3,
@@ -113,8 +117,7 @@ export const Hero3DScene = () => {
     satB.position.set(-3.8 * scaleFactor, -2.0 * scaleFactor, 1.2);
     satellitesGroup.add(satB);
 
-    if (!isMobile) {
-      // Sat C: Dodecahedron (Only on Tablet & Desktop)
+    if (tier !== 'low') {
       const satCGeo = new THREE.DodecahedronGeometry(0.4 * scaleFactor);
       const satCMat = new THREE.MeshStandardMaterial({ color: 0x10b981, roughness: 0.3 });
       const satC = new THREE.Mesh(satCGeo, satCMat);
@@ -124,22 +127,22 @@ export const Hero3DScene = () => {
 
     scene.add(satellitesGroup);
 
-    // Parallax tracking
+    // Parallax Tracking
     let mouseX = 0;
     let mouseY = 0;
     let targetX = 0;
     let targetY = 0;
 
     const handleMouseMove = (event) => {
-      if (isMobile) return;
+      if (isTouch) return;
       const windowHalfX = window.innerWidth / 2;
       const windowHalfY = window.innerHeight / 2;
       mouseX = (event.clientX - windowHalfX) * 0.0006;
       mouseY = (event.clientY - windowHalfY) * 0.0006;
     };
 
-    if (!isMobile) {
-      window.addEventListener('mousemove', handleMouseMove);
+    if (!isTouch) {
+      window.addEventListener('mousemove', handleMouseMove, { passive: true });
     }
 
     // Resize Handler
@@ -152,14 +155,37 @@ export const Hero3DScene = () => {
       renderer.setSize(newWidth, newHeight);
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', handleResize, { passive: true });
+
+    // IntersectionObserver to pause rendering when hero is out of view
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isCanvasVisible = entry.isIntersecting;
+        if (isCanvasVisible && isTabVisible) {
+          renderLoop();
+        }
+      },
+      { threshold: 0.05 }
+    );
+
+    observer.observe(container);
+
+    const handleVisibility = () => {
+      isTabVisible = !document.hidden;
+      if (isCanvasVisible && isTabVisible) {
+        renderLoop();
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibility);
 
     // Animation Loop
     let animationFrameId;
     const clock = new THREE.Clock();
 
-    const animate = () => {
-      animationFrameId = requestAnimationFrame(animate);
+    const renderLoop = () => {
+      if (!isCanvasVisible || !isTabVisible) return;
+      animationFrameId = requestAnimationFrame(renderLoop);
 
       const elapsedTime = clock.getElapsedTime();
 
@@ -177,7 +203,7 @@ export const Hero3DScene = () => {
 
       satellitesGroup.rotation.y = elapsedTime * 0.25;
 
-      if (!isMobile) {
+      if (!isTouch) {
         camera.position.x = targetX * 6;
         camera.position.y = -targetY * 6;
       }
@@ -186,25 +212,27 @@ export const Hero3DScene = () => {
       renderer.render(scene, camera);
     };
 
-    animate();
+    renderLoop();
 
     return () => {
-      if (!isMobile) {
+      if (!isTouch) {
         window.removeEventListener('mousemove', handleMouseMove);
       }
       window.removeEventListener('resize', handleResize);
+      document.removeEventListener('visibilitychange', handleVisibility);
+      observer.disconnect();
       cancelAnimationFrame(animationFrameId);
       if (container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }
       renderer.dispose();
     };
-  }, []);
+  }, [isTouch, tier, maxDpr]);
 
   return (
     <div
       ref={mountRef}
-      className="w-full h-[260px] xs:h-[300px] sm:h-[400px] md:h-[480px] lg:h-[540px] relative z-10 mx-auto max-w-full overflow-hidden"
+      className="w-full h-[240px] xs:h-[280px] sm:h-[380px] md:h-[460px] lg:h-[520px] relative z-10 mx-auto max-w-full overflow-hidden"
     />
   );
 };
