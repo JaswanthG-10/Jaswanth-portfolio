@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BackgroundParticles } from './components/BackgroundParticles';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
@@ -9,18 +9,42 @@ import { Experience } from './components/Experience';
 import { Education } from './components/Education';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
+import { LoginIntro } from './components/LoginIntro';
 
 export default function App() {
+  const [isUnlocked, setIsUnlocked] = useState(false);
+
+  useEffect(() => {
+    // Check if intro was already played in session
+    const unlocked = sessionStorage.getItem('portfolio_unlocked');
+    if (unlocked === 'true') {
+      setIsUnlocked(true);
+    }
+  }, []);
+
+  const handleUnlock = () => {
+    sessionStorage.setItem('portfolio_unlocked', 'true');
+    setIsUnlocked(true);
+  };
+
+  const handleReplayIntro = () => {
+    sessionStorage.removeItem('portfolio_unlocked');
+    setIsUnlocked(false);
+  };
+
   return (
     <div className="relative min-h-screen text-slate-800 antialiased overflow-hidden">
       
-      {/* Background Floating Particle Dust Motes */}
+      {/* Scene 1 & 2: 3D Rolling Login Intro Sequence */}
+      {!isUnlocked && <LoginIntro onComplete={handleUnlock} />}
+
+      {/* Background Particles */}
       <BackgroundParticles />
 
-      {/* Floating Glass Top Navigation */}
-      <Navbar />
+      {/* Floating Navbar */}
+      <Navbar onReplayIntro={handleReplayIntro} />
 
-      {/* Main Content Sections */}
+      {/* Scene 3: Portfolio Reveal Main Content */}
       <main className="relative z-10 space-y-8">
         <Hero />
         <About />
@@ -32,7 +56,7 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <Footer />
+      <Footer onReplayIntro={handleReplayIntro} />
 
     </div>
   );
