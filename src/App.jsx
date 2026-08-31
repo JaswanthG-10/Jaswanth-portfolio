@@ -9,42 +9,42 @@ import { Experience } from './components/Experience';
 import { Education } from './components/Education';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
-import { LoginIntro } from './components/LoginIntro';
+import { WelcomeGateway } from './components/WelcomeGateway';
 
 export default function App() {
-  const [isUnlocked, setIsUnlocked] = useState(false);
+  const [isEntered, setIsEntered] = useState(false);
 
   useEffect(() => {
-    // Check if intro was already played in session
-    const unlocked = sessionStorage.getItem('portfolio_unlocked');
-    if (unlocked === 'true') {
-      setIsUnlocked(true);
+    // Check if welcome gateway was already passed in current session
+    const entered = sessionStorage.getItem('portfolio_entered');
+    if (entered === 'true') {
+      setIsEntered(true);
     }
   }, []);
 
-  const handleUnlock = () => {
-    sessionStorage.setItem('portfolio_unlocked', 'true');
-    setIsUnlocked(true);
+  const handleEnter = () => {
+    sessionStorage.setItem('portfolio_entered', 'true');
+    setIsEntered(true);
   };
 
-  const handleReplayIntro = () => {
-    sessionStorage.removeItem('portfolio_unlocked');
-    setIsUnlocked(false);
+  const handleReplayGateway = () => {
+    sessionStorage.removeItem('portfolio_entered');
+    setIsEntered(false);
   };
 
   return (
     <div className="relative min-h-screen text-slate-800 antialiased overflow-hidden">
       
-      {/* Scene 1 & 2: 3D Rolling Login Intro Sequence */}
-      {!isUnlocked && <LoginIntro onComplete={handleUnlock} />}
+      {/* 3D Welcome Gateway Screen */}
+      {!isEntered && <WelcomeGateway onEnter={handleEnter} />}
 
       {/* Background Particles */}
       <BackgroundParticles />
 
       {/* Floating Navbar */}
-      <Navbar onReplayIntro={handleReplayIntro} />
+      <Navbar onReplayIntro={handleReplayGateway} />
 
-      {/* Scene 3: Portfolio Reveal Main Content */}
+      {/* Main Portfolio Content */}
       <main className="relative z-10 space-y-8">
         <Hero />
         <About />
@@ -56,7 +56,7 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <Footer onReplayIntro={handleReplayIntro} />
+      <Footer onReplayIntro={handleReplayGateway} />
 
     </div>
   );
