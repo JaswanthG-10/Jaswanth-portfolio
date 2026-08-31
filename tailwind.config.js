@@ -17,18 +17,18 @@ export default {
     extend: {
       colors: {
         soft: {
-          bg: '#EEF1F7',
-          bgSecondary: '#E6EAF3',
-          card: 'rgba(240, 243, 250, 0.75)',
-          border: 'rgba(100, 110, 150, 0.15)',
-          textDark: '#172033',
-          textMuted: '#58647A',
+          bg: '#E2E8F0',
+          bgSecondary: '#D9E1ED',
+          card: 'rgba(240, 244, 252, 0.82)',
+          border: 'rgba(100, 110, 150, 0.2)',
+          textDark: '#1E293B',
+          textMuted: '#475569',
         },
         brand: {
-          violet: '#6C5CE7',
-          blue: '#4C8DFF',
-          periwinkle: '#8B7CFF',
-          cyan: '#67C6E3',
+          violet: '#6366F1',
+          blue: '#3B82F6',
+          periwinkle: '#818CF8',
+          cyan: '#38BDF8',
         }
       },
       fontFamily: {
@@ -36,13 +36,13 @@ export default {
         display: ['Space Grotesk', 'Plus Jakarta Sans', 'sans-serif'],
       },
       boxShadow: {
-        '2xs': '0 1px 3px rgba(100, 110, 150, 0.08)',
-        'xs': '0 2px 6px rgba(100, 110, 150, 0.12)',
-        'glass-sm': '0 8px 24px -4px rgba(100, 110, 150, 0.12), 0 4px 12px -2px rgba(108, 92, 231, 0.08)',
-        'glass': '0 20px 45px -15px rgba(100, 110, 150, 0.18), 0 10px 22px -10px rgba(108, 92, 231, 0.12)',
-        'glass-hover': '0 30px 60px -12px rgba(108, 92, 231, 0.25), 0 18px 36px -18px rgba(76, 141, 255, 0.2)',
-        'glow-violet': '0 0 25px rgba(108, 92, 231, 0.35)',
-        'glow-cyan': '0 0 25px rgba(103, 198, 227, 0.35)',
+        '2xs': '0 1px 3px rgba(100, 110, 150, 0.1)',
+        'xs': '0 2px 6px rgba(100, 110, 150, 0.14)',
+        'glass-sm': '0 8px 24px -4px rgba(100, 110, 150, 0.15), 0 4px 12px -2px rgba(99, 102, 241, 0.1)',
+        'glass': '0 20px 45px -15px rgba(100, 110, 150, 0.2), 0 10px 22px -10px rgba(99, 102, 241, 0.14)',
+        'glass-hover': '0 30px 60px -12px rgba(99, 102, 241, 0.28), 0 18px 36px -18px rgba(59, 130, 246, 0.22)',
+        'glow-violet': '0 0 25px rgba(99, 102, 241, 0.35)',
+        'glow-cyan': '0 0 25px rgba(56, 189, 248, 0.35)',
       },
       animation: {
         'float-slow': 'float 7s ease-in-out infinite',
