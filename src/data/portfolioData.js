@@ -11,7 +11,7 @@ export const personalInfo = {
   name: "Jaswanth G.",
   fullName: "Jaswanth G",
   role: "AI/ML-Focused CSE Student | Backend & Intelligent Application Development",
-  shortBio: "Computer Science Engineering student specializing in AI/ML engineering, RAG pipelines, robust backend engineering, and end-to-end intelligent applications.",
+  shortBio: "Computer Science Engineering student specializing in AI/ML engineering, intelligent search pipelines, robust backend APIs, and end-to-end web applications.",
   location: "Chennai, Tamil Nadu, India",
   institution: "Rajalakshmi Engineering College",
   graduationYear: "2029",
@@ -23,11 +23,11 @@ export const personalInfo = {
 };
 
 export const aboutData = {
-  headline: "Architecting End-to-End Intelligent Systems",
+  headline: "Building Practical AI Systems & Web Applications",
   bio: [
-    "I am a Computer Science Engineering student focused on AI, machine learning, and end-to-end intelligent application development—combining core AI/ML concepts with production APIs, relational & vector databases, retrieval pipelines, authentication, and modern web interfaces.",
-    "Rather than viewing machine learning as isolated algorithms, I build complete software solutions—integrating Retrieval-Augmented Generation (RAG), vector embeddings, document OCR parsing, FastAPI REST backends, and reactive interfaces into seamless, weightless experiences.",
-    "Technical board member at InovX Club and open-source enthusiast, committed to continuous mastery in advanced Python, data structures, and production-grade software engineering."
+    "I am a Computer Science Engineering student focused on building intelligent, full-stack software applications—combining core machine learning concepts with high-performance APIs, reliable databases, document search, and clean user interfaces.",
+    "Rather than treating machine learning as isolated code snippets, I create complete software solutions—integrating smart search pipelines, document analysis tools, secure FastAPI backends, and responsive React interfaces into smooth, accessible experiences.",
+    "Technical board member at InovX Club and open-source enthusiast, committed to building clean, well-tested code and useful software for everyday problem solving."
   ],
   stats: [
     { label: "Core Projects Built", value: "4+" },
@@ -41,52 +41,52 @@ export const skillsData = {
   categories: [
     {
       name: "Programming Languages",
-      color: "from-indigo-500 to-purple-600",
+      color: "from-indigo-600 to-purple-600",
       skills: ["Python", "Java", "C", "SQL"]
     },
     {
-      name: "AI / ML Engineering",
-      color: "from-purple-500 to-pink-500",
+      name: "AI & Machine Learning",
+      color: "from-purple-600 to-pink-600",
       skills: [
         "Machine Learning",
-        "Content-Based Recommendation",
-        "Cosine Similarity",
-        "RAG (Retrieval-Augmented Gen)",
-        "Embeddings",
-        "Semantic Retrieval",
-        "Vector Search"
+        "Content Recommendation",
+        "Cosine Similarity (Similarity Matching)",
+        "RAG (Smart Document Search)",
+        "Text Embeddings",
+        "Semantic Search",
+        "Vector Databases"
       ]
     },
     {
-      name: "Backend Engineering",
-      color: "from-blue-500 to-cyan-500",
+      name: "Backend Development",
+      color: "from-blue-600 to-indigo-600",
       skills: [
         "FastAPI",
         "REST APIs",
         "SQLAlchemy",
-        "JWT Authentication",
+        "JWT Security & Auth",
         "Pydantic Validation"
       ]
     },
     {
       name: "Frontend & Web",
-      color: "from-sky-400 to-indigo-500",
+      color: "from-sky-500 to-indigo-600",
       skills: ["React", "Next.js", "HTML", "CSS", "Tailwind CSS"]
     },
     {
       name: "Databases & Storage",
-      color: "from-teal-400 to-emerald-500",
-      skills: ["MySQL", "ChromaDB", "Vector Databases"]
+      color: "from-teal-500 to-emerald-600",
+      skills: ["MySQL", "ChromaDB (Vector Storage)", "Relational Databases"]
     },
     {
-      name: "Document & AI Processing",
-      color: "from-amber-500 to-orange-500",
+      name: "Document & Text Processing",
+      color: "from-amber-600 to-orange-600",
       skills: [
         "PyMuPDF",
-        "OCR",
+        "OCR (Text Extraction)",
         "Document Parsing",
-        "Chunking",
-        "Citation-Aware Retrieval"
+        "Text Chunking",
+        "Citation Search"
       ]
     },
     {
@@ -96,99 +96,98 @@ export const skillsData = {
     }
   ],
   currentlyBuilding: [
-    { name: "Advanced Python", detail: "Deep dive into async patterns, concurrency & metaprogramming" },
-    { name: "DSA (Data Structures & Algorithms)", detail: "Algorithmic problem solving & graph/tree optimizations" },
-    { name: "ML Engineering", detail: "Pipeline architecture, feature engineering & model serving" },
-    { name: "RAG Architectures", detail: "Advanced chunking, hybrid retrieval & reranking strategies" },
-    { name: "Open Source", detail: "Contributing to community AI & backend developer tooling" },
-    { name: "Backend Engineering", detail: "High-throughput API design & microservices architecture" }
+    { name: "Advanced Python", detail: "Deep dive into async patterns, API performance & structured code" },
+    { name: "Data Structures & Algorithms", detail: "Problem solving, graph traversal & memory efficiency" },
+    { name: "Machine Learning Engineering", detail: "Model pipelines, feature preparation & real-world deployment" },
+    { name: "Smart Document Search (RAG)", detail: "Advanced document parsing, text retrieval & ranking strategies" },
+    { name: "Open Source", detail: "Contributing to community software & developer tools" },
+    { name: "Backend Architecture", detail: "Building fast, reliable API endpoints & microservice logic" }
   ]
 };
 
 export const projectsData = [
   {
     id: "iris-ai",
-    title: "Iris AI — Document Intelligence Platform",
-    tagline: "Flagship RAG Platform with Source & Page-Aware Retrieval",
+    title: "Iris AI — Smart Document Assistant",
+    tagline: "AI-Powered Document Search with Instant Page Citations",
     isFlagship: true,
     glyph: "FileText",
     category: "AI/ML & RAG",
-    problem: "Users need a faster way to understand and query information in complex documents without manual, time-consuming searches.",
-    engineeringApproach: "Built an AI-powered platform ingesting PDF/DOCX/TXT files with OCR, semantic chunking, vector embeddings, and a RAG pipeline featuring source and page-aware citation retrieval backed by JWT authentication.",
-    techStack: ["Python", "FastAPI", "ChromaDB", "SQLAlchemy", "Pydantic", "JWT", "Next.js", "React", "PyMuPDF"],
-    capabilityDemonstrated: "Applied RAG architecture, document processing, backend APIs, user authentication, vector databases, and seamless frontend-backend integration.",
+    problem: "Reading through long, complex documents (like PDFs or reports) to find specific answers takes hours of manual scanning.",
+    engineeringApproach: "Iris AI lets users upload large documents and ask questions in plain English. The system scans the files, understands the context, and returns precise answers along with exact page citations so users can instantly verify the source.",
+    techStack: ["Python", "FastAPI", "ChromaDB (Vector Store)", "PyMuPDF", "React", "Next.js", "JWT Auth"],
+    capabilityDemonstrated: "Built a complete AI document search pipeline (RAG architecture), automated text extraction, secure user login, and a responsive web interface.",
     links: {
       github: "https://github.com/JaswanthG-10/iris-ai",
       demo: "#"
     },
     highlights: [
-      "PDF/DOCX/TXT parsing & OCR text extraction with PyMuPDF",
-      "Vector embeddings & semantic chunking stored in ChromaDB",
-      "Page and source citation tracking in RAG responses",
-      "FastAPI REST backend with JWT security & Next.js frontend"
+      "Upload and parse PDF, DOCX, and TXT files automatically",
+      "Instant AI answers backed by exact page and document citations",
+      "FastAPI web backend with secure user login and React interface"
     ]
   },
   {
     id: "lumina-ai",
-    title: "Lumina AI — Movie Recommendation System",
-    tagline: "Content-Based Recommendation Engine via Vector Similarity",
+    title: "Lumina AI — Movie Discovery Engine",
+    tagline: "Personalized Movie Recommendations Based on Story & Atmosphere",
     isFlagship: false,
     glyph: "Film",
     category: "AI/ML",
-    problem: "Movie discovery is inefficient without personalized or similarity-based content guidance.",
-    engineeringApproach: "Engineered a content-based recommendation algorithm utilizing cosine similarity over feature vectors, presented through an interactive discovery interface with metadata, ratings, and recommendations.",
-    techStack: ["Python", "Machine Learning", "Cosine Similarity", "React"],
-    capabilityDemonstrated: "Practical ML fundamentals, recommendation vector logic, and integration of model outputs into a responsive user interface.",
+    problem: "Finding movies that match a specific mood or storyline is difficult when streaming sites only filter by broad genres.",
+    engineeringApproach: "Lumina AI analyzes plot summaries, themes, and story features to suggest relevant films. Instead of relying only on category tags, it calculates story similarity to deliver recommendations tailored to what a viewer wants to watch.",
+    techStack: ["Python", "Machine Learning", "Similarity Vector Matching", "React"],
+    capabilityDemonstrated: "Applied machine learning recommendation logic, text feature analysis, and connected the model outputs to a clean interactive web design.",
     links: {
       github: "https://github.com/JaswanthG-10/lumina-ai",
       demo: "#"
     },
     highlights: [
-      "Cosine similarity vector calculation across metadata features",
-      "Feature engineering pipeline for plot, genre & cast vectors",
-      "Interactive recommendation UI built in React"
+      "Similarity matching across movie plot summaries and themes",
+      "Feature analysis pipeline evaluating plot, cast, and genres",
+      "Interactive recommendation UI built with React"
     ]
   },
   {
     id: "fixit",
-    title: "FixIt — Campus Issue Reporting & Tracking Platform",
-    tagline: "Role: Backend Developer | Full-Lifecycle Issue Management System",
+    title: "FixIt — Campus Issue Tracking Platform",
+    tagline: "Role: Backend Developer | Centralized Management System",
     isFlagship: false,
     glyph: "CheckSquare",
     category: "Backend Engineering",
-    problem: "Campus issues are hard to report, prioritize, and resolve when communication across departments is fragmented.",
-    engineeringApproach: "Served as the Backend Developer on a collaborative platform for issue reporting, status tracking, upvoting, and an admin dashboard for priority management.",
-    techStack: ["Backend APIs", "Database Integration", "Authentication Concepts", "Git", "GitHub"],
-    capabilityDemonstrated: "Team development, backend module ownership, version-control collaboration, and robust CRUD/API engineering.",
+    problem: "Reporting campus maintenance problems is slow and disorganized when requests are scattered across channels.",
+    engineeringApproach: "FixIt provides a unified campus platform where students can log maintenance issues and track their resolution status. Administrators get a prioritized dashboard to assign tasks, update statuses, and resolve facility issues faster.",
+    techStack: ["Backend REST APIs", "Database Architecture", "User Authentication", "Git & GitHub"],
+    capabilityDemonstrated: "Collaborative teamwork, backend API engineering, role-based user management, and reliable database storage.",
     links: {
       github: "https://github.com/JaswanthG-10/fixit-backend",
       demo: "#"
     },
     highlights: [
-      "RESTful API design for issue lifecycle state management",
-      "Role-based authentication & admin priority dashboards",
-      "Git/GitHub multi-branch team collaboration"
+      "Clean API design for logging, prioritizing, and resolving issues",
+      "Role-based authentication for students and admin managers",
+      "Multi-developer team collaboration using Git and GitHub"
     ]
   },
   {
     id: "bank-mgmt",
     title: "Bank Management System",
-    tagline: "Desktop Banking Application with GUI & Relational Database",
+    tagline: "Desktop Banking Application with Secure Database Operations",
     isFlagship: false,
     glyph: "Landmark",
     category: "Desktop & Database",
-    problem: "Basic banking workflows require structured relational storage, transaction handling, and a usable desktop interface.",
-    engineeringApproach: "Developed a desktop banking application connecting a Python graphical interface to a relational MySQL database for account-management operations and secure transaction logging.",
-    techStack: ["Python", "Tkinter", "MySQL"],
-    capabilityDemonstrated: "Foundational application logic, database connectivity, GUI programming, and transactional CRUD implementation.",
+    problem: "Managing account balances and money transfers requires foolproof data logging to prevent financial record errors.",
+    engineeringApproach: "Developed a desktop banking application that handles core financial tasks including account creation, balance updates, and money transfers. It connects a user-friendly interface to a MySQL database to ensure every transaction is recorded accurately.",
+    techStack: ["Python", "Tkinter GUI", "MySQL Database"],
+    capabilityDemonstrated: "Desktop application development, SQL database integration, transaction accuracy, and secure record handling.",
     links: {
       github: "https://github.com/JaswanthG-10/bank-management-system",
       demo: "#"
     },
     highlights: [
-      "Tkinter desktop graphical user interface",
-      "Relational MySQL schema with transaction integrity",
-      "Complete account creation, update, and transfer operations"
+      "Desktop user interface for quick account operations",
+      "Structured MySQL database ensuring accurate account records",
+      "Full support for account creation, balance checks, and transfers"
     ]
   }
 ];
@@ -199,15 +198,15 @@ export const experienceData = [
     organization: "InovX Club",
     period: "2025 — Present",
     type: "Community & Leadership",
-    description: "Technical community involvement with exposure to collaborative software development, technical evaluation, and peer engineering activities.",
+    description: "Actively involved in technical leadership, organizing peer workshops, guiding student software projects, and evaluating collaborative code builds.",
     badge: "Club Leadership"
   },
   {
-    role: "Open-Source Direction",
+    role: "Open-Source Contributor",
     organization: "Independent Development",
     period: "Ongoing",
     type: "Open Source",
-    description: "Actively developing the Git/GitHub workflow, codebase practices, and technical skills needed to contribute effectively to open-source software projects.",
+    description: "Building open-source tools, practicing modern Git workflows, and sharpening codebase architecture skills to contribute to developer tools.",
     badge: "Open Source"
   }
 ];
@@ -219,8 +218,8 @@ export const educationData = {
   period: "Expected Graduation 2029",
   specialization: "AI/ML Engineering & Intelligent Systems Development",
   highlights: [
-    "Specializing in AI/ML engineering and end-to-end intelligent application development",
+    "Specializing in Computer Science, Machine Learning, and Web Application Development",
     "Active Technical Board Member at InovX Club",
-    "Focus Areas: Machine Learning, RAG, Backend REST APIs, Systems Design, Data Structures"
+    "Key Focus: Machine Learning, Smart Document Search, FastAPI Backends, Data Structures"
   ]
 };

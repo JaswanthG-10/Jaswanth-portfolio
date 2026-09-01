@@ -7,64 +7,71 @@
     scroll-behavior: smooth;
     overflow-x: hidden;
     font-size: clamp(14px, 1vw + 10px, 18px);
+    background-color: #F5F3EE;
+    color: #1E293B;
   }
 
   body {
-    background-color: #E2E8F0;
+    background-color: #F5F3EE;
     background-image: 
-      radial-gradient(at 0% 0%, rgba(213, 222, 235, 0.95) 0px, transparent 55%),
-      radial-gradient(at 100% 0%, rgba(226, 231, 244, 0.95) 0px, transparent 55%),
-      radial-gradient(at 50% 50%, rgba(217, 225, 237, 0.8) 0px, transparent 55%),
-      radial-gradient(at 100% 100%, rgba(213, 222, 235, 0.9) 0px, transparent 55%),
-      radial-gradient(at 0% 100%, rgba(226, 231, 244, 0.9) 0px, transparent 55%);
+      radial-gradient(at 0% 0%, rgba(237, 235, 230, 0.95) 0px, transparent 55%),
+      radial-gradient(at 100% 0%, rgba(244, 242, 237, 0.95) 0px, transparent 55%),
+      radial-gradient(at 50% 50%, rgba(235, 233, 226, 0.8) 0px, transparent 55%),
+      radial-gradient(at 100% 100%, rgba(237, 235, 230, 0.9) 0px, transparent 55%),
+      radial-gradient(at 0% 100%, rgba(244, 242, 237, 0.9) 0px, transparent 55%);
     background-attachment: fixed;
     color: #1E293B;
     overflow-x: hidden;
     width: 100%;
     min-height: 100dvh;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  ::selection {
+    background-color: rgba(99, 102, 241, 0.25);
+    color: #1E293B;
   }
 }
 
 /* Fluid Typography Utilities */
 .text-fluid-hero {
-  font-size: clamp(2.1rem, 5vw + 1rem, 4.5rem);
+  font-size: clamp(2.1rem, 5vw + 1rem, 4.2rem);
   line-height: 1.12;
 }
 
 .text-fluid-heading {
-  font-size: clamp(1.5rem, 3vw + 0.5rem, 3rem);
+  font-size: clamp(1.5rem, 3vw + 0.5rem, 2.75rem);
   line-height: 1.2;
 }
 
 .text-fluid-subheading {
-  font-size: clamp(1.05rem, 1.8vw + 0.4rem, 1.75rem);
+  font-size: clamp(1.05rem, 1.8vw + 0.4rem, 1.6rem);
   line-height: 1.3;
 }
 
 .text-fluid-body {
-  font-size: clamp(0.875rem, 1.2vw + 0.2rem, 1.1rem);
+  font-size: clamp(0.875rem, 1.2vw + 0.2rem, 1.05rem);
   line-height: 1.6;
 }
 
-/* Glassmorphism Classes: Rich Cool Slate Palette */
+/* Glassmorphism Classes: Muted Neutral Palette (#F5F3EE base) */
 .glass-panel {
-  background: rgba(240, 244, 252, 0.88);
-  border: 1px solid rgba(100, 110, 150, 0.2);
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(100, 110, 140, 0.16);
   box-shadow: 
-    0 15px 35px -5px rgba(100, 110, 150, 0.15),
-    0 6px 15px -4px rgba(99, 102, 241, 0.08);
+    0 15px 35px -5px rgba(100, 110, 140, 0.12),
+    0 6px 15px -4px rgba(99, 102, 241, 0.06);
 }
 
 @media (min-width: 768px) {
   .glass-panel {
-    background: rgba(240, 244, 252, 0.78);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.95);
     box-shadow: 
-      0 22px 45px -15px rgba(100, 110, 150, 0.18),
-      0 10px 22px -10px rgba(99, 102, 241, 0.12),
-      inset 0 1px 0 rgba(255, 255, 255, 0.95);
+      0 20px 45px -15px rgba(100, 110, 140, 0.14),
+      0 10px 22px -10px rgba(99, 102, 241, 0.08);
   }
 }
 
@@ -74,19 +81,19 @@
 
 @media (hover: hover) and (pointer: fine) {
   .glass-panel-hover:hover {
-    background: rgba(255, 255, 255, 0.92);
-    border-color: rgba(99, 102, 241, 0.35);
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(99, 102, 241, 0.3);
     box-shadow: 
-      0 30px 60px -12px rgba(99, 102, 241, 0.28),
-      0 16px 32px -8px rgba(59, 130, 246, 0.2);
+      0 28px 55px -12px rgba(99, 102, 241, 0.2),
+      0 14px 28px -8px rgba(59, 130, 246, 0.14);
     transform: translateY(-4px);
   }
 }
 
 .glass-pill {
-  background: rgba(240, 244, 252, 0.92);
-  border: 1px solid rgba(100, 110, 150, 0.2);
-  box-shadow: 0 2px 8px rgba(100, 110, 150, 0.12);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(100, 110, 140, 0.16);
+  box-shadow: 0 2px 8px rgba(100, 110, 140, 0.08);
   min-height: 40px;
   display: inline-flex;
   align-items: center;
@@ -94,21 +101,21 @@
 
 @media (min-width: 768px) {
   .glass-pill {
-    background: rgba(240, 244, 252, 0.8);
+    background: rgba(255, 255, 255, 0.82);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
   }
 }
 
 .glass-tray-building {
-  background: rgba(240, 244, 252, 0.85);
-  border: 2px dashed rgba(99, 102, 241, 0.35);
-  box-shadow: inset 0 2px 8px rgba(99, 102, 241, 0.05);
+  background: rgba(255, 255, 255, 0.85);
+  border: 2px dashed rgba(99, 102, 241, 0.3);
+  box-shadow: inset 0 2px 8px rgba(99, 102, 241, 0.04);
 }
 
 @media (min-width: 768px) {
   .glass-tray-building {
-    background: rgba(240, 244, 252, 0.6);
+    background: rgba(255, 255, 255, 0.65);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
   }
@@ -119,14 +126,14 @@
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: rgba(226, 232, 240, 0.8);
+  background: rgba(245, 243, 238, 0.9);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(100, 110, 150, 0.4);
+  background: rgba(100, 110, 140, 0.35);
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(99, 102, 241, 0.6);
+  background: rgba(99, 102, 241, 0.5);
 }
 
 /* Floating Animations on Desktop Only */
