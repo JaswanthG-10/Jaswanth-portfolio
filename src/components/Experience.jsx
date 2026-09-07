@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Network, Award, GitPullRequest, Code2, Sparkles } from 'lucide-react';
+import { Network, Sparkles, Clock, Calendar, CheckCircle2 } from 'lucide-react';
 import { experienceData } from '../data/portfolioData';
 import { GlassCard } from './UI/GlassCard';
 import { useIntersectionAnimation } from '../hooks/useIntersectionAnimation';
 
 export const Experience = () => {
+  const [activeYear, setActiveYear] = useState('2025');
   const { ref: sectionRef, isVisible } = useIntersectionAnimation({ threshold: 0.05 });
 
+  const years = ['2021', '2022', '2023', '2024', '2025', '2026'];
+
   return (
-    <section id="experience" ref={sectionRef} className="py-16 sm:py-24 relative z-10">
+    <section id="experience" ref={sectionRef} className="py-16 sm:py-24 relative z-10 select-none">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -20,8 +23,8 @@ export const Experience = () => {
             transition={{ duration: 0.5 }}
             className="inline-flex items-center gap-2 glass-pill px-4 py-1.5 rounded-full text-xs font-bold text-[#E11D48] mb-3 border border-[#E11D48]/30 shadow-cinematic-red uppercase tracking-wider"
           >
-            <Network className="w-3.5 h-3.5 text-[#E11D48]" />
-            <span>Time Machine & Activities</span>
+            <Clock className="w-3.5 h-3.5 text-[#E11D48]" />
+            <span>Scene 3 — The Time Machine</span>
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 15 }}
@@ -29,8 +32,34 @@ export const Experience = () => {
             transition={{ duration: 0.5, delay: 0.05 }}
             className="text-fluid-heading font-extrabold text-white tracking-tight hero-heading"
           >
-            Experience & <span className="bg-gradient-to-r from-white via-[#F43F5E] to-[#06B6D4] bg-clip-text text-transparent">Contributions</span>
+            Interactive <span className="bg-gradient-to-r from-white via-[#F43F5E] to-[#06B6D4] bg-clip-text text-transparent">Timeline Rail (2021 — 2026)</span>
           </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="mt-3 text-fluid-body text-slate-400 max-w-lg mx-auto"
+          >
+            Select or hover any year to swing the clock hand across milestones from computer science coursework to Technical Board leadership.
+          </motion.p>
+        </div>
+
+        {/* ── Interactive Time Machine Clock Rail Controls ── */}
+        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-12 max-w-2xl mx-auto p-2 rounded-full bg-[#121218]/90 border border-white/15 shadow-2xl">
+          {years.map((yr) => (
+            <button
+              key={yr}
+              onClick={() => setActiveYear(yr)}
+              onMouseEnter={() => setActiveYear(yr)}
+              className={`px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-extrabold font-mono transition-all duration-300 cursor-pointer ${
+                activeYear === yr
+                  ? 'bg-gradient-to-r from-[#E11D48] to-[#06B6D4] text-white shadow-cinematic-red scale-105 border-transparent'
+                  : 'text-slate-400 hover:text-white hover:bg-white/10'
+              }`}
+            >
+              {yr}
+            </button>
+          ))}
         </div>
 
         {/* Timeline Rail */}
@@ -58,7 +87,7 @@ export const Experience = () => {
                         <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider text-[#E11D48] bg-[#E11D48]/15 border border-[#E11D48]/30">
                           {item.badge}
                         </span>
-                        <span className="text-xs font-semibold text-slate-400">
+                        <span className="text-xs font-semibold text-slate-400 font-mono">
                           {item.period}
                         </span>
                       </div>
