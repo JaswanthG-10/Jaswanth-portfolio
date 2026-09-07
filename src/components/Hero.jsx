@@ -21,7 +21,7 @@ export const Hero = () => {
     mouseRef.current = { x, y };
 
     if (wordmarkRef.current) {
-      wordmarkRef.current.style.transform = `translate3d(${x * -40}px, ${y * -40}px, 0)`;
+      wordmarkRef.current.style.transform = `translate3d(${x * -30}px, ${y * -30}px, 0)`;
     }
   };
 
@@ -29,26 +29,26 @@ export const Hero = () => {
     <section
       id="hero"
       onMouseMove={handleMouseMove}
-      className="relative min-h-[92vh] flex items-center justify-center pt-24 pb-16 overflow-hidden z-10 select-none"
+      className="relative min-h-[85vh] sm:min-h-[90vh] flex items-center justify-center pt-20 sm:pt-24 pb-12 sm:pb-16 w-full max-w-full overflow-hidden z-10 select-none"
     >
       {/* ── Scene 1: Procedural WebGL Video Canvas (Zero-Re-Render Mouse Ref) ── */}
       <CinematicHeroVideo mouseRef={mouseRef} />
 
       {/* ── Kinetic Wordmark Materializing Behind Content ── */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none -z-10 overflow-hidden">
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none -z-10 overflow-hidden max-w-full">
         <h1
           ref={wordmarkRef}
-          className="wordmark-behind text-[17vw] font-black text-[#14141E]/90 tracking-tighter transition-transform duration-300 opacity-40 blur-[1px]"
+          className="wordmark-behind text-[13vw] sm:text-[15vw] font-black text-[#14141E]/90 tracking-tighter transition-transform duration-300 opacity-40 blur-[1px] max-w-full overflow-hidden"
         >
           JASWANTH
         </h1>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full max-w-full relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* Left Column: Headline & Position Statement */}
-          <div className="lg:col-span-7 text-center lg:text-left space-y-6">
+          <div className="lg:col-span-7 text-center lg:text-left space-y-5">
             
             {/* HUD Status Badge */}
             <motion.div
@@ -63,9 +63,9 @@ export const Hero = () => {
 
             {/* Name Header */}
             <motion.h1
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
+              transition={{ duration: 0.5, delay: 0.08 }}
               className="text-fluid-hero font-extrabold text-white tracking-tight hero-heading"
             >
               {personalInfo.name}
@@ -73,12 +73,12 @@ export const Hero = () => {
 
             {/* Headline Statement */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="space-y-2.5"
+              transition={{ duration: 0.5, delay: 0.15 }}
+              className="space-y-2"
             >
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-200 tracking-tight leading-snug">
+              <h2 className="text-lg sm:text-2xl font-bold text-slate-200 tracking-tight leading-snug">
                 {personalInfo.headline}
               </h2>
               <div className="inline-block px-3.5 py-1.5 rounded-xl bg-[#121218]/90 border border-white/15 text-xs sm:text-sm font-mono text-[#06B6D4] font-bold shadow-xs">
@@ -88,24 +88,24 @@ export const Hero = () => {
 
             {/* Concise Summary */}
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              transition={{ duration: 0.5, delay: 0.22 }}
               className="text-fluid-body text-slate-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-medium"
             >
               {personalInfo.shortBio}
             </motion.p>
 
-            {/* Action CTAs (Min 44x44px Touch Targets) */}
+            {/* Action CTAs */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex flex-wrap items-center justify-center lg:justify-start gap-3.5 pt-2"
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-1"
             >
               <a
                 href="#projects"
-                className="group px-7 py-3.5 rounded-full text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-[#E11D48] via-[#F43F5E] to-[#06B6D4] hover:opacity-95 shadow-cinematic-red flex items-center justify-center gap-2 transition-all min-h-[48px] min-w-[48px]"
+                className="group px-6 py-3 rounded-full text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-[#E11D48] via-[#F43F5E] to-[#06B6D4] hover:opacity-95 shadow-cinematic-red flex items-center justify-center gap-2 transition-all min-h-[44px] cursor-pointer"
               >
                 <Sparkles className="w-4 h-4 text-white" />
                 <span>Explore Projects</span>
@@ -116,7 +116,7 @@ export const Hero = () => {
                 href={personalInfo.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-5 py-3.5 rounded-full text-xs sm:text-sm font-bold text-slate-300 hover:text-white bg-[#121218] border border-white/15 hover:border-[#E11D48]/50 flex items-center justify-center gap-2 transition-all min-h-[48px] min-w-[48px]"
+                className="px-5 py-3 rounded-full text-xs sm:text-sm font-bold text-slate-300 hover:text-white bg-[#121218] border border-white/15 hover:border-[#E11D48]/50 flex items-center justify-center gap-2 transition-all min-h-[44px] cursor-pointer"
               >
                 <Github className="w-4 h-4" />
                 <span>GitHub</span>
@@ -126,7 +126,7 @@ export const Hero = () => {
                 href={personalInfo.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-5 py-3.5 rounded-full text-xs sm:text-sm font-bold text-slate-300 hover:text-white bg-[#121218] border border-white/15 hover:border-[#06B6D4]/50 flex items-center justify-center gap-2 transition-all min-h-[48px] min-w-[48px]"
+                className="px-5 py-3 rounded-full text-xs sm:text-sm font-bold text-slate-300 hover:text-white bg-[#121218] border border-white/15 hover:border-[#06B6D4]/50 flex items-center justify-center gap-2 transition-all min-h-[44px] cursor-pointer"
               >
                 <Linkedin className="w-4 h-4 text-[#06B6D4]" />
                 <span>LinkedIn</span>
@@ -136,14 +136,14 @@ export const Hero = () => {
           </div>
 
           {/* Right Column: Cinematic 3D HUD Showcase */}
-          <div className="lg:col-span-5 flex justify-center">
+          <div className="lg:col-span-5 flex justify-center w-full max-w-full">
             <motion.div
-              initial={{ opacity: 0, scale: 0.9, rotateY: -15 }}
-              animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-              transition={{ duration: 0.8, ease: 'outExpo' }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
               className="relative w-full max-w-sm sm:max-w-md"
             >
-              <GlassCard className="p-6 sm:p-8 rounded-3xl border-2 border-white/20 bg-[#121218]/95 shadow-cinematic-card relative overflow-hidden space-y-4">
+              <GlassCard className="p-5 sm:p-7 rounded-3xl border-2 border-white/20 bg-[#121218]/95 shadow-cinematic-card relative overflow-hidden space-y-3.5">
                 
                 {/* HUD Header */}
                 <div className="flex items-center justify-between pb-3 border-b border-white/15 text-xs font-mono text-slate-400">
@@ -154,7 +154,7 @@ export const Hero = () => {
                   <span className="text-[10px] text-emerald-400 font-bold">LIVE METRICS</span>
                 </div>
 
-                {/* 5 Project HUD Chips */}
+                {/* 3 Project HUD Chips */}
                 <div className="space-y-2.5">
                   <a
                     href="#projects"

@@ -12,7 +12,7 @@ import { Footer } from './components/Footer';
 
 export default function App() {
   return (
-    <div className="relative min-h-screen text-slate-100 antialiased overflow-hidden bg-[#0A0A0C]">
+    <div className="relative min-h-screen w-full max-w-full text-slate-100 antialiased overflow-x-hidden bg-[#0A0A0C]">
       
       {/* Background Particles */}
       <BackgroundParticles />
@@ -21,7 +21,7 @@ export default function App() {
       <Navbar />
 
       {/* Main Cinematic Portfolio Experience */}
-      <main className="relative z-10 space-y-4">
+      <main className="relative z-10 space-y-4 w-full max-w-full overflow-hidden">
         <Hero />
         <About />
         <Skills />

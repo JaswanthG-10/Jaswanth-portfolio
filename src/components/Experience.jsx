@@ -12,7 +12,7 @@ export const Experience = () => {
   const years = ['2021', '2022', '2023', '2024', '2025', '2026'];
 
   return (
-    <section id="experience" ref={sectionRef} className="py-16 sm:py-24 relative z-10 select-none">
+    <section id="experience" ref={sectionRef} className="py-16 sm:py-24 relative z-10 select-none w-full max-w-full overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}

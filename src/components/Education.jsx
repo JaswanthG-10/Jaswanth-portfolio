@@ -9,7 +9,7 @@ export const Education = () => {
   const { ref: sectionRef, isVisible } = useIntersectionAnimation({ threshold: 0.05 });
 
   return (
-    <section id="education" ref={sectionRef} className="py-16 sm:py-24 relative z-10">
+    <section id="education" ref={sectionRef} className="py-16 sm:py-24 relative z-10 w-full max-w-full overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
