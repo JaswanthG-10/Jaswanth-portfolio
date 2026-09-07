@@ -51,7 +51,7 @@ export const Experience = () => {
               key={yr}
               onClick={() => setActiveYear(yr)}
               onMouseEnter={() => setActiveYear(yr)}
-              className={`px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-extrabold font-mono transition-all duration-300 cursor-pointer ${
+              className={`px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-extrabold font-mono transition-all duration-300 min-h-[44px] flex items-center justify-center cursor-pointer ${
                 activeYear === yr
                   ? 'bg-gradient-to-r from-[#E11D48] to-[#06B6D4] text-white shadow-cinematic-red scale-105 border-transparent'
                   : 'text-slate-400 hover:text-white hover:bg-white/10'

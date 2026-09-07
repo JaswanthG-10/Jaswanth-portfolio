@@ -75,7 +75,6 @@ export const GlassCard = ({
       style={{
         transform: isMobile || isTouch ? 'none' : transform,
         transformStyle: 'preserve-3d',
-        willChange: 'transform, opacity',
       }}
       {...props}
     >

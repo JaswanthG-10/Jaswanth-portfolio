@@ -39,7 +39,7 @@ export const Footer = () => {
             <button
               onClick={scrollToTop}
               onMouseEnter={playHoverSound}
-              className="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-white border border-white/20 bg-white/5 hover:bg-white/15 transition-all flex items-center gap-1.5 min-h-[36px] cursor-pointer"
+              className="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-white border border-white/20 bg-white/5 hover:bg-white/15 transition-all flex items-center gap-1.5 min-h-[44px] cursor-pointer"
             >
               <span>Back to Top</span>
               <ArrowUp className="w-3.5 h-3.5 text-[#06B6D4]" />

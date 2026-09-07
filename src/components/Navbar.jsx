@@ -147,14 +147,14 @@ export const Navbar = () => {
         <div className="flex sm:hidden items-center gap-2">
           <button
             onClick={handleSoundToggle}
-            className="p-2 rounded-full text-slate-300 border border-white/15 bg-[#121218] min-w-[38px] min-h-[38px] flex items-center justify-center"
+            className="p-2 rounded-full text-slate-300 border border-white/15 bg-[#121218] min-w-[44px] min-h-[44px] flex items-center justify-center cursor-pointer"
           >
             {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4 text-[#06B6D4]" />}
           </button>
 
           <button
             onClick={() => { playClickSound(); setMobileMenuOpen(!mobileMenuOpen); }}
-            className="p-2 rounded-full text-white min-w-[38px] min-h-[38px] flex items-center justify-center border border-white/15 bg-[#121218]"
+            className="p-2 rounded-full text-white min-w-[44px] min-h-[44px] flex items-center justify-center border border-white/15 bg-[#121218] cursor-pointer"
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}

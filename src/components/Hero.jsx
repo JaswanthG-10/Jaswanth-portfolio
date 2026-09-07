@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles, Code2, Database, Cpu, Terminal, ShieldCheck, Github, Linkedin, Play, Film, Layers } from 'lucide-react';
-import { personalInfo, projectsData } from '../data/portfolioData';
+import { ArrowRight, Sparkles, Code2, Database, Terminal, ShieldCheck, Github, Linkedin, Film, Layers } from 'lucide-react';
+import { personalInfo } from '../data/portfolioData';
 import { GlassCard } from './UI/GlassCard';
 import { CinematicHeroVideo } from './CinematicHeroVideo';
 import { useDeviceCapabilities } from '../hooks/useDeviceCapabilities';
 
 export const Hero = () => {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const mouseRef = useRef({ x: 0, y: 0 });
+  const wordmarkRef = useRef(null);
   const { isTouch, prefersReducedMotion } = useDeviceCapabilities();
   const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
 
@@ -17,7 +18,11 @@ export const Hero = () => {
     const { innerWidth, innerHeight } = window;
     const x = (clientX - innerWidth / 2) / (innerWidth / 2);
     const y = (clientY - innerHeight / 2) / (innerHeight / 2);
-    setMousePos({ x, y });
+    mouseRef.current = { x, y };
+
+    if (wordmarkRef.current) {
+      wordmarkRef.current.style.transform = `translate3d(${x * -40}px, ${y * -40}px, 0)`;
+    }
   };
 
   return (
@@ -26,16 +31,14 @@ export const Hero = () => {
       onMouseMove={handleMouseMove}
       className="relative min-h-[92vh] flex items-center justify-center pt-24 pb-16 overflow-hidden z-10 select-none"
     >
-      {/* ── Scene 1: Procedural WebGL Video Canvas ── */}
-      <CinematicHeroVideo mousePos={mousePos} />
+      {/* ── Scene 1: Procedural WebGL Video Canvas (Zero-Re-Render Mouse Ref) ── */}
+      <CinematicHeroVideo mouseRef={mouseRef} />
 
       {/* ── Kinetic Wordmark Materializing Behind Content ── */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none -z-10 overflow-hidden">
         <h1
+          ref={wordmarkRef}
           className="wordmark-behind text-[17vw] font-black text-[#14141E]/90 tracking-tighter transition-transform duration-300 opacity-40 blur-[1px]"
-          style={{
-            transform: `translate3d(${mousePos.x * -40}px, ${mousePos.y * -40}px, 0)`,
-          }}
         >
           JASWANTH
         </h1>
@@ -93,7 +96,7 @@ export const Hero = () => {
               {personalInfo.shortBio}
             </motion.p>
 
-            {/* Action CTAs */}
+            {/* Action CTAs (Min 44x44px Touch Targets) */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -102,7 +105,7 @@ export const Hero = () => {
             >
               <a
                 href="#projects"
-                className="group px-7 py-3.5 rounded-full text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-[#E11D48] via-[#F43F5E] to-[#06B6D4] hover:opacity-95 shadow-cinematic-red flex items-center gap-2 transition-all min-h-[48px]"
+                className="group px-7 py-3.5 rounded-full text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-[#E11D48] via-[#F43F5E] to-[#06B6D4] hover:opacity-95 shadow-cinematic-red flex items-center justify-center gap-2 transition-all min-h-[48px] min-w-[48px]"
               >
                 <Sparkles className="w-4 h-4 text-white" />
                 <span>Explore Projects</span>
@@ -113,7 +116,7 @@ export const Hero = () => {
                 href={personalInfo.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-5 py-3.5 rounded-full text-xs sm:text-sm font-bold text-slate-300 hover:text-white bg-[#121218] border border-white/15 hover:border-[#E11D48]/50 flex items-center gap-2 transition-all min-h-[48px]"
+                className="px-5 py-3.5 rounded-full text-xs sm:text-sm font-bold text-slate-300 hover:text-white bg-[#121218] border border-white/15 hover:border-[#E11D48]/50 flex items-center justify-center gap-2 transition-all min-h-[48px] min-w-[48px]"
               >
                 <Github className="w-4 h-4" />
                 <span>GitHub</span>
@@ -123,7 +126,7 @@ export const Hero = () => {
                 href={personalInfo.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-5 py-3.5 rounded-full text-xs sm:text-sm font-bold text-slate-300 hover:text-white bg-[#121218] border border-white/15 hover:border-[#06B6D4]/50 flex items-center gap-2 transition-all min-h-[48px]"
+                className="px-5 py-3.5 rounded-full text-xs sm:text-sm font-bold text-slate-300 hover:text-white bg-[#121218] border border-white/15 hover:border-[#06B6D4]/50 flex items-center justify-center gap-2 transition-all min-h-[48px] min-w-[48px]"
               >
                 <Linkedin className="w-4 h-4 text-[#06B6D4]" />
                 <span>LinkedIn</span>
@@ -132,7 +135,7 @@ export const Hero = () => {
 
           </div>
 
-          {/* Right Column: Cinematic 3D HUD Showcase (No Photo / Clean Design) */}
+          {/* Right Column: Cinematic 3D HUD Showcase */}
           <div className="lg:col-span-5 flex justify-center">
             <motion.div
               initial={{ opacity: 0, scale: 0.9, rotateY: -15 }}
@@ -155,7 +158,7 @@ export const Hero = () => {
                 <div className="space-y-2.5">
                   <a
                     href="#projects"
-                    className="p-3 rounded-2xl bg-[#0A0A0C] border border-white/15 flex items-center justify-between group hover:border-[#E11D48]/60 transition-all"
+                    className="p-3 rounded-2xl bg-[#0A0A0C] border border-white/15 flex items-center justify-between group hover:border-[#E11D48]/60 transition-all min-h-[48px]"
                   >
                     <div className="flex items-center gap-3">
                       <ShieldCheck className="w-5 h-5 text-[#E11D48] shrink-0" />
@@ -169,7 +172,7 @@ export const Hero = () => {
 
                   <a
                     href="#projects"
-                    className="p-3 rounded-2xl bg-[#0A0A0C] border border-white/15 flex items-center justify-between group hover:border-[#06B6D4]/60 transition-all"
+                    className="p-3 rounded-2xl bg-[#0A0A0C] border border-white/15 flex items-center justify-between group hover:border-[#06B6D4]/60 transition-all min-h-[48px]"
                   >
                     <div className="flex items-center gap-3">
                       <Code2 className="w-5 h-5 text-[#06B6D4] shrink-0" />
@@ -183,7 +186,7 @@ export const Hero = () => {
 
                   <a
                     href="#projects"
-                    className="p-3 rounded-2xl bg-[#0A0A0C] border border-white/15 flex items-center justify-between group hover:border-[#6366F1]/60 transition-all"
+                    className="p-3 rounded-2xl bg-[#0A0A0C] border border-white/15 flex items-center justify-between group hover:border-[#6366F1]/60 transition-all min-h-[48px]"
                   >
                     <div className="flex items-center gap-3">
                       <Film className="w-5 h-5 text-[#6366F1] shrink-0" />
