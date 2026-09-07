@@ -1,136 +1,82 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Brain, Server, Layers, GraduationCap, MapPin, Target } from 'lucide-react';
+import { User, Award, GitPullRequest, Code2, Sparkles, CheckCircle2 } from 'lucide-react';
 import { aboutData, personalInfo } from '../data/portfolioData';
 import { GlassCard } from './UI/GlassCard';
+import { useIntersectionAnimation } from '../hooks/useIntersectionAnimation';
 
 export const About = () => {
+  const { ref: sectionRef, isVisible } = useIntersectionAnimation({ threshold: 0.05 });
+
   return (
-    <section id="about" className="py-16 sm:py-24 relative z-10">
+    <section id="about" ref={sectionRef} className="py-16 sm:py-24 relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 glass-pill px-4 py-1.5 rounded-full text-xs font-bold text-indigo-700 mb-3 border border-indigo-100"
+            className="inline-flex items-center gap-2 glass-pill px-4 py-1.5 rounded-full text-xs font-bold text-[#E11D48] mb-3 border border-[#E11D48]/30 shadow-cinematic-red uppercase tracking-wider"
           >
-            <Brain className="w-3.5 h-3.5 text-indigo-500" />
-            <span>About Me</span>
+            <User className="w-3.5 h-3.5 text-[#E11D48]" />
+            <span>Behind the Engineering</span>
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
             transition={{ duration: 0.5, delay: 0.05 }}
-            className="text-fluid-heading font-extrabold text-slate-900 tracking-tight"
+            className="text-fluid-heading font-extrabold text-white tracking-tight hero-heading"
           >
-            End-to-End <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-sky-500 bg-clip-text text-transparent">AI/ML Engineering</span> & Architecture
+            Computer Science <span className="bg-gradient-to-r from-white via-[#F43F5E] to-[#06B6D4] bg-clip-text text-transparent">Developer Background</span>
           </motion.h2>
         </div>
 
-        {/* Floating Glass Panels Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center max-w-6xl mx-auto">
           
-          {/* Left Column: Abstract 3D Avatar Orbit Graphic Widget */}
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:col-span-5 relative"
-          >
-            <GlassCard className="p-6 sm:p-8 rounded-3xl text-center relative overflow-hidden border-indigo-100/80 shadow-glass animate-float-2">
-              
-              {/* Background glow */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-indigo-100/40 via-purple-50/20 to-sky-100/30 -z-10" />
-
-              {/* Orbital Graphic Avatar */}
-              <div className="relative w-40 sm:w-48 h-40 sm:h-48 mx-auto my-4 sm:my-6 flex items-center justify-center">
-                <div className="absolute inset-0 rounded-full border-2 border-dashed border-indigo-300/70 animate-spin-slow" />
-                <div className="absolute inset-3 rounded-full border border-purple-300/60 animate-pulse-subtle" />
-
-                <div className="w-24 sm:w-28 h-24 sm:h-28 rounded-full bg-gradient-to-tr from-indigo-500 via-purple-500 to-sky-400 p-1 shadow-md flex items-center justify-center">
-                  <div className="w-full h-full rounded-full bg-white/95 backdrop-blur-md flex flex-col items-center justify-center p-2">
-                    <span className="text-xl sm:text-2xl font-black bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                      JG
-                    </span>
-                    <span className="text-[9px] font-bold text-slate-500 tracking-wider">
-                      AI / ML
-                    </span>
-                  </div>
-                </div>
-
-                <div className="absolute -top-1 left-1 glass-pill px-2.5 py-1 rounded-full text-[10px] font-bold text-indigo-700 border-indigo-200 shadow-2xs animate-float-1">
-                  RAG Pipelines
-                </div>
-                <div className="absolute bottom-1 -right-1 glass-pill px-2.5 py-1 rounded-full text-[10px] font-bold text-purple-700 border-purple-200 shadow-2xs animate-float-3">
-                  FastAPI REST
-                </div>
+          {/* Left Column: Portrait & Highlights */}
+          <div className="lg:col-span-5 flex flex-col items-center">
+            <GlassCard className="p-4 sm:p-5 rounded-3xl border border-white/20 bg-[#121218]/90 shadow-cinematic-card relative overflow-hidden group w-full max-w-sm">
+              <div className="relative rounded-2xl overflow-hidden aspect-square border border-white/20 shadow-xl bg-slate-900">
+                <img
+                  src={personalInfo.photoUrl}
+                  alt={personalInfo.fullName}
+                  className="w-full h-full object-cover object-top filter brightness-105 group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0C] via-transparent to-transparent opacity-70" />
               </div>
-
-              {/* Bio Summary Badges */}
-              <div className="mt-4 flex flex-col gap-2 text-left text-xs font-semibold text-slate-700">
-                <div className="flex items-center gap-2 bg-white/60 p-2.5 rounded-xl border border-white/80">
-                  <GraduationCap className="w-4 h-4 text-indigo-600 shrink-0" />
-                  <span>B.E. CSE @ Rajalakshmi Eng. College (2025–2029)</span>
-                </div>
-                <div className="flex items-center gap-2 bg-white/60 p-2.5 rounded-xl border border-white/80">
-                  <MapPin className="w-4 h-4 text-purple-600 shrink-0" />
-                  <span>Based in Chennai, Tamil Nadu, India</span>
-                </div>
-                <div className="flex items-center gap-2 bg-white/60 p-2.5 rounded-xl border border-white/80">
-                  <Target className="w-4 h-4 text-sky-600 shrink-0" />
-                  <span>Technical Board Member @ InovX Club</span>
-                </div>
+              <div className="pt-4 text-center">
+                <div className="text-lg font-extrabold text-white hero-heading">{personalInfo.fullName}</div>
+                <div className="text-xs font-semibold text-[#06B6D4] mt-0.5">{personalInfo.institution}</div>
               </div>
-
             </GlassCard>
-          </motion.div>
+          </div>
 
-          {/* Right Column: Profile Content */}
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:col-span-7"
-          >
-            <GlassCard className="p-6 sm:p-8 lg:p-10 rounded-3xl shadow-glass border-white/90">
-              <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-4 sm:mb-6 leading-snug">
-                {aboutData.headline}
-              </h3>
+          {/* Right Column: Bio Paragraphs & Highlights */}
+          <div className="lg:col-span-7 space-y-5">
+            <GlassCard className="p-6 sm:p-8 rounded-3xl shadow-cinematic-card border-white/15 bg-[#121218]/90 space-y-4">
+              <div className="flex items-center gap-2 text-xs font-extrabold text-[#E11D48] uppercase tracking-wider">
+                <Sparkles className="w-4 h-4" />
+                <span>{aboutData.headline}</span>
+              </div>
 
-              <div className="space-y-4 text-slate-600 text-fluid-body leading-relaxed max-w-prose">
-                {aboutData.bio.map((paragraph, index) => (
-                  <p key={index}>{paragraph}</p>
+              {aboutData.bio.map((paragraph, idx) => (
+                <p key={idx} className="text-xs sm:text-sm text-slate-300 leading-relaxed font-medium">
+                  {paragraph}
+                </p>
+              ))}
+
+              <div className="pt-4 border-t border-white/15 grid grid-cols-2 sm:grid-cols-4 gap-3">
+                {aboutData.stats.map((stat, sIdx) => (
+                  <div key={sIdx} className="p-3 rounded-2xl bg-[#0A0A0C] border border-white/10 text-center">
+                    <div className="text-lg sm:text-xl font-extrabold text-white hero-heading">{stat.value}</div>
+                    <div className="text-[10px] font-semibold text-slate-400 mt-0.5">{stat.label}</div>
+                  </div>
                 ))}
               </div>
-
-              {/* Focus Pillars */}
-              <div className="mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-                <div className="p-3.5 sm:p-4 rounded-2xl bg-indigo-50/60 border border-indigo-100/80">
-                  <Brain className="w-5 h-5 text-indigo-600 mb-2" />
-                  <h4 className="text-xs sm:text-sm font-bold text-slate-900">RAG & Vector Search</h4>
-                  <p className="text-[11px] text-slate-500 mt-1">Building document Q&A pipelines with page/source citation retrieval.</p>
-                </div>
-                <div className="p-3.5 sm:p-4 rounded-2xl bg-purple-50/60 border border-purple-100/80">
-                  <Server className="w-5 h-5 text-purple-600 mb-2" />
-                  <h4 className="text-xs sm:text-sm font-bold text-slate-900">Backend Systems</h4>
-                  <p className="text-[11px] text-slate-500 mt-1">Designing Python REST APIs, SQLAlchemy schemas & JWT security.</p>
-                </div>
-                <div className="p-3.5 sm:p-4 rounded-2xl bg-sky-50/60 border border-sky-100/80">
-                  <Layers className="w-5 h-5 text-sky-600 mb-2" />
-                  <h4 className="text-xs sm:text-sm font-bold text-slate-900">End-to-End Apps</h4>
-                  <p className="text-[11px] text-slate-500 mt-1">Connecting machine learning models directly into modern React UIs.</p>
-                </div>
-              </div>
-
             </GlassCard>
-          </motion.div>
+          </div>
 
         </div>
 

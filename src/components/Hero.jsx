@@ -1,208 +1,198 @@
-import React, { Suspense, lazy, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles, Cpu, Code2, Database, Github, Linkedin, Mail } from 'lucide-react';
+import { ArrowRight, Sparkles, Code2, Database, Cpu, Terminal, ShieldCheck, Github, Linkedin } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
 import { GlassCard } from './UI/GlassCard';
-import { StaticHeroOrb } from './StaticHeroOrb';
 import { useDeviceCapabilities } from '../hooks/useDeviceCapabilities';
 
-// Lazy-load Three.js 3D Scene ONLY for tablet & desktop screens
-const Hero3DScene = lazy(() =>
-  import('./Hero3DScene').then((module) => ({ default: module.Hero3DScene }))
-);
+export const Hero = ({ onContactClick }) => {
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const { isTouch, prefersReducedMotion } = useDeviceCapabilities();
+  const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
 
-export const Hero = () => {
-  const { prefersReducedMotion, tier } = useDeviceCapabilities();
-  const [isMobileScreen, setIsMobileScreen] = useState(true);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobileScreen(window.innerWidth < 768);
-    };
-    checkMobile();
-    window.addEventListener('resize', checkMobile, { passive: true });
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  const showStaticFallback = prefersReducedMotion || tier === 'low' || isMobileScreen;
+  const handleMouseMove = (e) => {
+    if (isTouch || isMobile || prefersReducedMotion) return;
+    const { clientX, clientY } = e;
+    const { innerWidth, innerHeight } = window;
+    const x = (clientX - innerWidth / 2) / (innerWidth / 2);
+    const y = (clientY - innerHeight / 2) / (innerHeight / 2);
+    setMousePos({ x, y });
+  };
 
   return (
-    <section id="hero" className="relative min-h-[100dvh] pt-24 sm:pt-28 pb-12 sm:pb-16 flex items-center justify-center overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
-        
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-center">
+    <section
+      id="hero"
+      onMouseMove={handleMouseMove}
+      className="relative min-h-[92vh] flex items-center justify-center pt-24 pb-16 overflow-hidden z-10"
+    >
+      {/* ── Scene 1: Cinematic Wordmark Materializing Behind Subject ── */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none -z-10 select-none overflow-hidden">
+        <h1
+          className="wordmark-behind text-[16vw] font-black text-[#16161E]/90 tracking-tighter transition-transform duration-300 opacity-30 blur-[1px]"
+          style={{
+            transform: `translate3d(${mousePos.x * -35}px, ${mousePos.y * -35}px, 0)`,
+          }}
+        >
+          JASWANTH
+        </h1>
+      </div>
+
+      {/* Ambient Crimson & Cyan Rim Orbs */}
+      <div className="absolute top-1/4 left-10 w-96 h-96 bg-[#E11D48]/20 rounded-full blur-[120px] pointer-events-none -z-10" />
+      <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-[#06B6D4]/15 rounded-full blur-[120px] pointer-events-none -z-10" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
-          {/* Left Column: Hero Text Content */}
-          <div className="lg:col-span-7 flex flex-col items-start text-left pt-2 lg:pt-0">
+          {/* Left Column: Headline & Position Statement */}
+          <div className="lg:col-span-7 text-center lg:text-left space-y-5">
             
-            {/* Status Pill */}
+            {/* HUD Status Pill */}
             <motion.div
-              initial={{ opacity: 0, y: 12 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="inline-flex items-center gap-2 glass-pill px-3.5 sm:px-4 py-1.5 rounded-full mb-4 text-xs font-bold text-indigo-700 border border-indigo-200/80 shadow-xs max-w-full"
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold text-[#E11D48] bg-[#E11D48]/10 border border-[#E11D48]/30 shadow-cinematic-red uppercase tracking-widest"
             >
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping shrink-0" />
-              <span className="truncate">Seeking AI/ML & Backend Internships</span>
-              <Sparkles className="w-3.5 h-3.5 text-indigo-500 shrink-0 ml-0.5" />
+              <Terminal className="w-3.5 h-3.5 text-[#E11D48] animate-pulse" />
+              <span>SYSTEM ONLINE • 2021 — 2026</span>
             </motion.div>
 
-            {/* Name & Headline */}
+            {/* Name Header */}
             <motion.h1
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.04, ease: [0.22, 1, 0.36, 1] }}
-              className="text-fluid-hero font-extrabold tracking-tight text-slate-900 leading-[1.12] w-full"
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-fluid-hero font-extrabold text-white tracking-tight hero-heading"
             >
-              Weightless Intelligence. <br className="hidden sm:inline" />
-              <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-sky-500 bg-clip-text text-transparent">
-                {personalInfo.name}
-              </span>
+              Hi, I'm <span className="bg-gradient-to-r from-white via-[#F43F5E] to-[#06B6D4] bg-clip-text text-transparent">{personalInfo.fullName}</span>
             </motion.h1>
 
-            {/* Title */}
-            <motion.p
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-3 sm:mt-4 text-fluid-subheading font-semibold text-slate-700 max-w-2xl"
-            >
-              {personalInfo.role}
-            </motion.p>
-
-            {/* Short Intro */}
-            <motion.p
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-3 text-fluid-body text-slate-500 max-w-xl leading-relaxed"
-            >
-              {personalInfo.shortBio} Combining core AI/ML concepts with REST APIs, databases, vector retrieval, authentication, and modern web interfaces into end-to-end intelligent applications.
-            </motion.p>
-
-            {/* CTAs */}
+            {/* Portfolio Positioning Headline */}
             <motion.div
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-6 sm:mt-8 flex flex-wrap items-center gap-3 w-full sm:w-auto"
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="space-y-2"
+            >
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-200 tracking-tight leading-snug">
+                {personalInfo.headline}
+              </h2>
+              <div className="inline-block px-3 py-1 rounded-lg bg-[#121218] border border-white/10 text-xs sm:text-sm font-mono text-[#06B6D4] font-semibold">
+                {personalInfo.subheadline}
+              </div>
+            </motion.div>
+
+            {/* Concise Bio */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="text-fluid-body text-slate-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed"
+            >
+              {personalInfo.shortBio}
+            </motion.p>
+
+            {/* Action Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="flex flex-wrap items-center justify-center lg:justify-start gap-3.5 pt-2"
             >
               <a
                 href="#projects"
-                className="w-full sm:w-auto glass-pill px-6 sm:px-7 py-3 sm:py-3.5 rounded-full font-bold text-xs sm:text-sm text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-sky-500 hover:from-indigo-700 hover:to-sky-600 shadow-[0_8px_20px_rgba(99,102,241,0.3)] transition-all duration-300 flex items-center justify-center gap-2 hover:-translate-y-0.5 min-h-[44px]"
+                className="group px-6 py-3 rounded-full text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-[#E11D48] via-[#F43F5E] to-[#06B6D4] hover:opacity-95 shadow-cinematic-red flex items-center gap-2 transition-all min-h-[46px]"
               >
-                <span>View Projects</span>
-                <ArrowRight className="w-4 h-4" />
+                <Sparkles className="w-4 h-4" />
+                <span>Explore Projects</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
 
-              <a
-                href="#contact"
-                className="w-full sm:w-auto glass-pill px-6 py-3 sm:py-3.5 rounded-full font-semibold text-xs sm:text-sm text-slate-700 bg-white/70 hover:bg-white hover:text-indigo-600 border border-white/90 shadow-xs transition-all duration-300 flex items-center justify-center min-h-[44px]"
-              >
-                Get In Touch
-              </a>
-            </motion.div>
-
-            {/* Social Links */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-6 flex items-center gap-3"
-            >
-              <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Connect:</span>
               <a
                 href={personalInfo.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="GitHub"
-                className="glass-pill p-2.5 rounded-full text-slate-600 hover:text-indigo-600 hover:bg-white shadow-2xs min-w-[40px] min-h-[40px] flex items-center justify-center"
+                className="px-4 py-3 rounded-full text-xs sm:text-sm font-bold text-slate-300 hover:text-white bg-[#121218] border border-white/15 hover:border-[#E11D48]/50 flex items-center gap-2 transition-all min-h-[46px]"
               >
                 <Github className="w-4 h-4" />
+                <span>GitHub</span>
               </a>
+
               <a
                 href={personalInfo.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                className="glass-pill p-2.5 rounded-full text-slate-600 hover:text-indigo-600 hover:bg-white shadow-2xs min-w-[40px] min-h-[40px] flex items-center justify-center"
+                className="px-4 py-3 rounded-full text-xs sm:text-sm font-bold text-slate-300 hover:text-white bg-[#121218] border border-white/15 hover:border-[#06B6D4]/50 flex items-center gap-2 transition-all min-h-[46px]"
               >
-                <Linkedin className="w-4 h-4" />
-              </a>
-              <a
-                href={`mailto:${personalInfo.email}`}
-                aria-label="Email"
-                className="glass-pill p-2.5 rounded-full text-slate-600 hover:text-indigo-600 hover:bg-white shadow-2xs min-w-[40px] min-h-[40px] flex items-center justify-center"
-              >
-                <Mail className="w-4 h-4" />
+                <Linkedin className="w-4 h-4 text-[#06B6D4]" />
+                <span>LinkedIn</span>
               </a>
             </motion.div>
 
-            {/* Technical Badges */}
+            {/* Tech Highlights Grid */}
             <motion.div
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-8 flex flex-wrap items-center gap-2 pt-4 border-t border-slate-200/50 w-full"
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-4 max-w-lg mx-auto lg:mx-0"
             >
-              <div className="flex items-center gap-1.5 text-[11px] sm:text-xs font-semibold text-slate-600 bg-white/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/80 shadow-2xs">
-                <Cpu className="w-3.5 h-3.5 text-purple-600 shrink-0" />
-                <span>RAG & Vector AI</span>
+              <div className="p-3 rounded-xl bg-[#121218]/90 border border-white/10 flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-[#E11D48] shrink-0" />
+                <div className="text-[11px] font-bold text-slate-300">ClaimProof AI</div>
               </div>
-              <div className="flex items-center gap-1.5 text-[11px] sm:text-xs font-semibold text-slate-600 bg-white/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/80 shadow-2xs">
-                <Database className="w-3.5 h-3.5 text-indigo-600 shrink-0" />
-                <span>FastAPI & ChromaDB</span>
+              <div className="p-3 rounded-xl bg-[#121218]/90 border border-white/10 flex items-center gap-2">
+                <Code2 className="w-4 h-4 text-[#06B6D4] shrink-0" />
+                <div className="text-[11px] font-bold text-slate-300">RAG Pipelines</div>
               </div>
-              <div className="flex items-center gap-1.5 text-[11px] sm:text-xs font-semibold text-slate-600 bg-white/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/80 shadow-2xs">
-                <Code2 className="w-3.5 h-3.5 text-sky-600 shrink-0" />
-                <span>Next.js & React</span>
+              <div className="p-3 rounded-xl bg-[#121218]/90 border border-white/10 flex items-center gap-2">
+                <Database className="w-4 h-4 text-[#6366F1] shrink-0" />
+                <div className="text-[11px] font-bold text-slate-300">FastAPI & SQL</div>
               </div>
             </motion.div>
 
           </div>
 
-          {/* Right Column: Visual Centerpiece (Static Orb on mobile, WebGL on desktop) */}
-          <div className="lg:col-span-5 relative flex flex-col items-center justify-center mt-6 lg:mt-0">
-            
-            <div className="absolute inset-0 bg-gradient-to-tr from-indigo-200/30 via-purple-200/20 to-sky-200/30 rounded-full blur-3xl -z-10 transform scale-110 pointer-events-none" />
-
-            {showStaticFallback ? (
-              <StaticHeroOrb />
-            ) : (
-              <Suspense fallback={<StaticHeroOrb />}>
-                <Hero3DScene />
-              </Suspense>
-            )}
-
-            {/* Desktop floating glass badges */}
-            <div className="hidden sm:block absolute top-2 right-4 z-20 pointer-events-auto animate-float-1">
-              <GlassCard className="p-3 rounded-2xl shadow-glass flex items-center gap-2.5 border-indigo-100 max-w-[200px]">
-                <div className="w-8 h-8 rounded-xl bg-indigo-100/80 flex items-center justify-center text-indigo-600 font-bold text-xs shrink-0">
-                  ⚡
+          {/* Right Column: Cinematic 3D Glass Frame with Jaswanth's Portrait Photo */}
+          <div className="lg:col-span-5 flex justify-center">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, rotateY: -15 }}
+              animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+              transition={{ duration: 0.8, ease: 'outExpo' }}
+              className="relative w-full max-w-sm sm:max-w-md"
+            >
+              <GlassCard className="p-4 sm:p-5 rounded-3xl border-2 border-white/20 bg-[#121218]/90 shadow-cinematic-card relative overflow-hidden group">
+                
+                {/* SVG HUD Orbital Rings */}
+                <div className="absolute inset-0 pointer-events-none flex items-center justify-center opacity-30 group-hover:opacity-60 transition-opacity">
+                  <div className="w-full h-full rounded-full border border-dashed border-[#E11D48] animate-spin-slow" />
                 </div>
-                <div>
-                  <div className="text-[11px] font-bold text-slate-800 leading-tight">Iris AI Flagship</div>
-                  <div className="text-[9px] text-slate-500 font-medium">RAG & Citations</div>
+
+                {/* Portrait Image Frame with Rim Glow */}
+                <div className="relative rounded-2xl overflow-hidden aspect-square border border-white/20 shadow-2xl bg-slate-900">
+                  <img
+                    src={personalInfo.photoUrl}
+                    alt={personalInfo.fullName}
+                    className="w-full h-full object-cover object-top filter brightness-105 contrast-105 group-hover:scale-105 transition-transform duration-500"
+                  />
+                  {/* Crimson & Cyan Rim Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0C] via-transparent to-transparent opacity-80" />
+                  
+                  {/* Photo Caption Badge */}
+                  <div className="absolute bottom-3 left-3 right-3 p-3 rounded-xl bg-[#0A0A0C]/90 backdrop-blur-md border border-white/15 flex items-center justify-between">
+                    <div>
+                      <div className="text-xs font-bold text-white hero-heading">{personalInfo.fullName}</div>
+                      <div className="text-[10px] font-semibold text-[#06B6D4]">CSE @ Rajalakshmi Eng. College</div>
+                    </div>
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#E11D48] animate-ping" />
+                  </div>
                 </div>
+
               </GlassCard>
-            </div>
-
-            <div className="hidden sm:block absolute bottom-4 left-4 z-20 pointer-events-auto animate-float-3">
-              <GlassCard className="p-3 rounded-2xl shadow-glass flex items-center gap-2.5 border-purple-100 max-w-[210px]">
-                <div className="w-8 h-8 rounded-xl bg-purple-100/80 flex items-center justify-center text-purple-600 font-bold text-xs shrink-0">
-                  🎓
-                </div>
-                <div>
-                  <div className="text-[11px] font-bold text-slate-800 leading-tight">B.E. CSE (2025–2029)</div>
-                  <div className="text-[9px] text-slate-500 font-medium">Rajalakshmi Eng. College</div>
-                </div>
-              </GlassCard>
-            </div>
-
+            </motion.div>
           </div>
 
         </div>
-
       </div>
     </section>
   );

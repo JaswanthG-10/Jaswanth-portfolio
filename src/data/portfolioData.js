@@ -10,12 +10,14 @@ export const navLinks = [
 export const personalInfo = {
   name: "Jaswanth G.",
   fullName: "Jaswanth G",
-  role: "AI/ML-Focused CSE Student | Backend & Intelligent Application Development",
-  shortBio: "Computer Science Engineering student specializing in AI/ML engineering, intelligent search pipelines, robust backend APIs, and end-to-end web applications.",
+  headline: "Computer Science Student | Software Development & AI/ML",
+  subheadline: "Python • React • FastAPI • RAG • SQL",
+  shortBio: "CSE student at Rajalakshmi Engineering College actively building toward Software Engineering & AI/ML Engineering—combining production software engineering, RAG pipelines, REST APIs, and full-stack web applications.",
   location: "Chennai, Tamil Nadu, India",
-  institution: "Rajalakshmi Engineering College",
+  institution: "Rajalakshmi Engineering College, Chennai",
   graduationYear: "2029",
   degree: "B.E. Computer Science and Engineering",
+  photoUrl: "/jaswanth_photo.jpg",
   github: "https://github.com/JaswanthG-10",
   githubUsername: "JaswanthG-10",
   linkedin: "https://www.linkedin.com/in/jaswanth-g10",
@@ -23,171 +25,180 @@ export const personalInfo = {
 };
 
 export const aboutData = {
-  headline: "Building Practical AI Systems & Web Applications",
+  headline: "Building Software Engineering & Applied AI Solutions",
   bio: [
-    "I am a Computer Science Engineering student focused on building intelligent, full-stack software applications—combining core machine learning concepts with high-performance APIs, reliable databases, document search, and clean user interfaces.",
-    "Rather than treating machine learning as isolated code snippets, I create complete software solutions—integrating smart search pipelines, document analysis tools, secure FastAPI backends, and responsive React interfaces into smooth, accessible experiences.",
-    "Technical board member at InovX Club and open-source enthusiast, committed to building clean, well-tested code and useful software for everyday problem solving."
+    "I am a Computer Science Engineering student at Rajalakshmi Engineering College, Chennai, specializing in software development, backend APIs, and applied AI systems.",
+    "My focus spans conventional software engineering and applied AI—building production-ready Retrieval-Augmented Generation (RAG) applications, document verification systems, recommendation engines, and relational database applications.",
+    "As a Technical Board Member at InovX Club and open-source contributor, I practice modern GitHub team workflows (PRs, code reviews, feature branching) and contribute to community software development."
   ],
   stats: [
-    { label: "Core Projects Built", value: "4+" },
-    { label: "Specialization", value: "AI/ML & Backend" },
+    { label: "Core Projects Built", value: "5+" },
+    { label: "Specialization", value: "Software & AI/ML" },
     { label: "Degree Expected", value: "2029" },
-    { label: "Focus Stack", value: "Python / FastAPI / React" }
+    { label: "Core Stack", value: "Python / React / FastAPI / SQL" }
   ]
 };
 
 export const skillsData = {
   categories: [
     {
-      name: "Programming Languages",
-      color: "from-indigo-600 to-purple-600",
-      skills: ["Python", "Java", "C", "SQL"]
+      name: "Programming",
+      color: "from-red-500 to-amber-500",
+      skills: ["Python", "Java", "C", "SQL", "JavaScript / TypeScript"]
     },
     {
-      name: "AI & Machine Learning",
-      color: "from-purple-600 to-pink-600",
+      name: "Frontend Development",
+      color: "from-cyan-500 to-blue-500",
+      skills: ["HTML", "CSS", "JavaScript", "React", "Next.js", "Tailwind CSS"]
+    },
+    {
+      name: "Backend & Databases",
+      color: "from-indigo-500 to-purple-600",
+      skills: ["FastAPI", "REST APIs", "MySQL", "Supabase", "SQLAlchemy", "Authentication / JWT"]
+    },
+    {
+      name: "AI / ML Engineering",
+      color: "from-pink-500 to-rose-600",
       skills: [
-        "Machine Learning",
-        "Content Recommendation",
-        "Cosine Similarity (Similarity Matching)",
-        "RAG (Smart Document Search)",
-        "Text Embeddings",
-        "Semantic Search",
-        "Vector Databases"
-      ]
-    },
-    {
-      name: "Backend Development",
-      color: "from-blue-600 to-indigo-600",
-      skills: [
-        "FastAPI",
-        "REST APIs",
-        "SQLAlchemy",
-        "JWT Security & Auth",
-        "Pydantic Validation"
-      ]
-    },
-    {
-      name: "Frontend & Web",
-      color: "from-sky-500 to-indigo-600",
-      skills: ["React", "Next.js", "HTML", "CSS", "Tailwind CSS"]
-    },
-    {
-      name: "Databases & Storage",
-      color: "from-teal-500 to-emerald-600",
-      skills: ["MySQL", "ChromaDB (Vector Storage)", "Relational Databases"]
-    },
-    {
-      name: "Document & Text Processing",
-      color: "from-amber-600 to-orange-600",
-      skills: [
-        "PyMuPDF",
-        "OCR (Text Extraction)",
-        "Document Parsing",
-        "Text Chunking",
-        "Citation Search"
+        "Machine Learning fundamentals",
+        "Retrieval-Augmented Generation (RAG)",
+        "LLM integration",
+        "Embeddings",
+        "Vector databases",
+        "ChromaDB",
+        "Document processing",
+        "OCR",
+        "Cosine similarity",
+        "Pandas",
+        "Scikit-learn"
       ]
     },
     {
       name: "Developer Tools",
-      color: "from-slate-600 to-slate-800",
-      skills: ["Git", "GitHub", "Vercel", "Uvicorn", "VS Code", "Postman"]
+      color: "from-emerald-500 to-teal-600",
+      skills: [
+        "Git",
+        "GitHub",
+        "GitHub collaborative workflow",
+        "Vercel",
+        "VS Code",
+        "Figma",
+        "AI-assisted development tools"
+      ]
     }
   ],
   currentlyBuilding: [
-    { name: "Advanced Python", detail: "Deep dive into async patterns, API performance & structured code" },
-    { name: "Data Structures & Algorithms", detail: "Problem solving, graph traversal & memory efficiency" },
-    { name: "Machine Learning Engineering", detail: "Model pipelines, feature preparation & real-world deployment" },
-    { name: "Smart Document Search (RAG)", detail: "Advanced document parsing, text retrieval & ranking strategies" },
-    { name: "Open Source", detail: "Contributing to community software & developer tools" },
-    { name: "Backend Architecture", detail: "Building fast, reliable API endpoints & microservice logic" }
+    { name: "Advanced Python", detail: "Metaprogramming, async I/O patterns & concurrency" },
+    { name: "RAG & LLM Systems", detail: "Citation tracking, vector chunking & evidence evaluation" },
+    { name: "Full-Stack Web Engineering", detail: "Next.js 14, Supabase Auth & responsive UI components" },
+    { name: "Open-Source Workflow", detail: "Pull requests, code reviews & multi-developer branching" }
   ]
 };
 
 export const projectsData = [
   {
-    id: "iris-ai",
-    title: "Iris AI — Smart Document Assistant",
-    tagline: "AI-Powered Document Search with Instant Page Citations",
+    id: "claimproof-ai",
+    title: "ClaimProof AI — Motor Claim Evidence Reviewer",
+    tagline: "AI-assisted insurance evidence reviewer with policy rule validation",
     isFlagship: true,
-    glyph: "FileText",
+    glyph: "ShieldCheck",
     category: "AI/ML & RAG",
-    problem: "Reading through long, complex documents (like PDFs or reports) to find specific answers takes hours of manual scanning.",
-    engineeringApproach: "Iris AI lets users upload large documents and ask questions in plain English. The system scans the files, understands the context, and returns precise answers along with exact page citations so users can instantly verify the source.",
-    techStack: ["Python", "FastAPI", "ChromaDB (Vector Store)", "PyMuPDF", "React", "Next.js", "JWT Auth"],
-    capabilityDemonstrated: "Built a complete AI document search pipeline (RAG architecture), automated text extraction, secure user login, and a responsive web interface.",
+    problem: "Motor insurance claim processing requires laborious manual verification of submitted evidence documents against complex policy rules.",
+    engineeringApproach: "Built an AI-assisted claim evidence reviewer that analyzes submitted claim documents against policy rules, identifies missing or conflicting evidence, and provides cited recommendations.",
+    techStack: ["Next.js", "React", "TypeScript", "Supabase", "AI/LLM", "RAG", "PDF Processing"],
+    capabilityDemonstrated: "LLM integration, document evidence evaluation, RAG pipeline architecture, Supabase auth/storage, and Next.js full-stack development.",
     links: {
-      github: "https://github.com/JaswanthG-10/iris-ai",
+      github: "https://github.com/JaswanthG-10/claimproof-ai",
       demo: "#"
     },
     highlights: [
-      "Upload and parse PDF, DOCX, and TXT files automatically",
-      "Instant AI answers backed by exact page and document citations",
-      "FastAPI web backend with secure user login and React interface"
+      "Analyzes claim evidence documents against policy rules automatically",
+      "Flags missing or conflicting evidence with cited recommendations",
+      "Built with Next.js, TypeScript, Supabase, and RAG document evaluation"
+    ]
+  },
+  {
+    id: "iris-ai",
+    title: "Iris AI / DocuMind AI — Document Intelligence",
+    tagline: "RAG-based document intelligence app with grounded page citations",
+    isFlagship: true,
+    glyph: "FileText",
+    category: "AI/ML & RAG",
+    problem: "Extracting precise information from lengthy PDF documents manually is slow and error-prone.",
+    engineeringApproach: "Engineered a RAG-based document intelligence application that lets users upload documents and ask questions with document-grounded answers and page citations.",
+    techStack: ["Python", "FastAPI", "Next.js", "React", "ChromaDB", "Embeddings", "RAG", "OCR", "SQLAlchemy", "JWT"],
+    capabilityDemonstrated: "Vector embeddings, ChromaDB vector store, FastAPI REST backend, document OCR parsing, and page-level citation search.",
+    links: {
+      github: "https://github.com/JaswanthG-10/iris-ai",
+      demo: "https://iris-ai-document-reade.vercel.app"
+    },
+    highlights: [
+      "Uploads & parses PDF/DOCX/TXT files with OCR text extraction",
+      "Vector embeddings stored in ChromaDB for grounded answers",
+      "FastAPI REST backend with JWT authentication and Next.js UI"
     ]
   },
   {
     id: "lumina-ai",
-    title: "Lumina AI — Movie Discovery Engine",
-    tagline: "Personalized Movie Recommendations Based on Story & Atmosphere",
+    title: "Lumina AI — Movie Recommendation System",
+    tagline: "Content-based movie recommendation system via cosine similarity",
     isFlagship: false,
     glyph: "Film",
     category: "AI/ML",
-    problem: "Finding movies that match a specific mood or storyline is difficult when streaming sites only filter by broad genres.",
-    engineeringApproach: "Lumina AI analyzes plot summaries, themes, and story features to suggest relevant films. Instead of relying only on category tags, it calculates story similarity to deliver recommendations tailored to what a viewer wants to watch.",
-    techStack: ["Python", "Machine Learning", "Similarity Vector Matching", "React"],
-    capabilityDemonstrated: "Applied machine learning recommendation logic, text feature analysis, and connected the model outputs to a clean interactive web design.",
+    problem: "Standard movie platforms recommend titles based only on simple genres rather than storyline similarity.",
+    engineeringApproach: "Developed a content-based movie recommendation system that recommends similar movies using cosine similarity and provides movie information, posters, ratings, and trailers.",
+    techStack: ["Python", "Machine Learning", "Pandas", "Scikit-learn", "Cosine Similarity", "React/Next.js"],
+    capabilityDemonstrated: "Machine Learning fundamentals, cosine similarity feature vectors, Pandas data preprocessing, and React frontend integration.",
     links: {
-      github: "https://github.com/JaswanthG-10/lumina-ai",
-      demo: "#"
+      github: "https://github.com/JaswanthG-10/AI_MOVIE_RECOMMENDATION_PROJECT",
+      demo: "https://ai-movie-recommendation-project.vercel.app"
     },
     highlights: [
-      "Similarity matching across movie plot summaries and themes",
-      "Feature analysis pipeline evaluating plot, cast, and genres",
-      "Interactive recommendation UI built with React"
+      "Calculates cosine similarity vectors across plot & feature metadata",
+      "Displays posters, ratings, trailers, and recommended movies",
+      "Interactive discovery interface built with React/Next.js"
     ]
   },
   {
     id: "fixit",
-    title: "FixIt — Campus Issue Tracking Platform",
-    tagline: "Role: Backend Developer | Centralized Management System",
+    title: "FixIt — Campus Issue-Reporting Platform",
+    tagline: "Collaborative campus issue reporting and resolution workflow",
     isFlagship: false,
     glyph: "CheckSquare",
-    category: "Backend Engineering",
-    problem: "Reporting campus maintenance problems is slow and disorganized when requests are scattered across channels.",
-    engineeringApproach: "FixIt provides a unified campus platform where students can log maintenance issues and track their resolution status. Administrators get a prioritized dashboard to assign tasks, update statuses, and resolve facility issues faster.",
-    techStack: ["Backend REST APIs", "Database Architecture", "User Authentication", "Git & GitHub"],
-    capabilityDemonstrated: "Collaborative teamwork, backend API engineering, role-based user management, and reliable database storage.",
+    category: "Full-Stack & Backend",
+    problem: "Campus maintenance issues lack a centralized platform for reporting, tracking, and priority management.",
+    engineeringApproach: "Created a collaborative campus issue-reporting platform where students can report and track issues while administrators manage their resolution workflow.",
+    techStack: ["Backend APIs", "Database", "Authentication", "Git/GitHub", "Web Development"],
+    capabilityDemonstrated: "Collaborative Git/GitHub development, backend REST APIs, multi-role user workflows, and issue lifecycle management.",
     links: {
       github: "https://github.com/JaswanthG-10/fixit-backend",
       demo: "#"
     },
     highlights: [
-      "Clean API design for logging, prioritizing, and resolving issues",
-      "Role-based authentication for students and admin managers",
-      "Multi-developer team collaboration using Git and GitHub"
+      "RESTful API design for logging and resolving campus issues",
+      "Role-based authorization for students and admin managers",
+      "Built collaboratively using GitHub team branching workflow"
     ]
   },
   {
     id: "bank-mgmt",
     title: "Bank Management System",
-    tagline: "Desktop Banking Application with Secure Database Operations",
+    tagline: "Desktop banking app with persistent database transaction storage",
     isFlagship: false,
     glyph: "Landmark",
     category: "Desktop & Database",
-    problem: "Managing account balances and money transfers requires foolproof data logging to prevent financial record errors.",
-    engineeringApproach: "Developed a desktop banking application that handles core financial tasks including account creation, balance updates, and money transfers. It connects a user-friendly interface to a MySQL database to ensure every transaction is recorded accurately.",
-    techStack: ["Python", "Tkinter GUI", "MySQL Database"],
-    capabilityDemonstrated: "Desktop application development, SQL database integration, transaction accuracy, and secure record handling.",
+    problem: "Core banking workflows require structured relational database storage and accurate transaction logging.",
+    engineeringApproach: "Developed a desktop banking application implementing core account and transaction operations with persistent database storage.",
+    techStack: ["Python", "Tkinter", "MySQL"],
+    capabilityDemonstrated: "Desktop GUI development, relational MySQL schema design, transactional integrity, and CRUD implementation.",
     links: {
       github: "https://github.com/JaswanthG-10/bank-management-system",
       demo: "#"
     },
     highlights: [
-      "Desktop user interface for quick account operations",
-      "Structured MySQL database ensuring accurate account records",
-      "Full support for account creation, balance checks, and transfers"
+      "Tkinter graphical user interface for banking operations",
+      "Relational MySQL schema ensuring transactional data safety",
+      "Complete support for account creation, balance checks, and transfers"
     ]
   }
 ];
@@ -197,29 +208,37 @@ export const experienceData = [
     role: "Technical Board Member",
     organization: "InovX Club",
     period: "2025 — Present",
-    type: "Community & Leadership",
-    description: "Actively involved in technical leadership, organizing peer workshops, guiding student software projects, and evaluating collaborative code builds.",
+    type: "Leadership & Community",
+    description: "Selected through technical/project-based evaluation. Participate in technical projects, peer collaboration, and software development activities.",
     badge: "Club Leadership"
   },
   {
     role: "Open-Source Contributor",
-    organization: "Independent Development",
+    organization: "Independent & Community",
     period: "Ongoing",
     type: "Open Source",
-    description: "Building open-source tools, practicing modern Git workflows, and sharpening codebase architecture skills to contribute to developer tools.",
+    description: "Hands-on experience with the GitHub contribution workflow: repositories, forks, branches, commits, pull requests, code reviews, and merges.",
     badge: "Open Source"
+  },
+  {
+    role: "Project & Hackathon Builder",
+    organization: "Hackathons & Autonomous Projects",
+    period: "2024 — Present",
+    type: "Projects & Competition",
+    description: "Built projects across AI/ML, RAG, full-stack web, databases, and desktop apps—working both independently and in collaborative GitHub-based teams.",
+    badge: "Hackathons"
   }
 ];
 
 export const educationData = {
   degree: "B.E. Computer Science and Engineering",
-  institution: "Rajalakshmi Engineering College",
+  institution: "Rajalakshmi Engineering College, Chennai",
   location: "Chennai, Tamil Nadu, India",
   period: "Expected Graduation 2029",
-  specialization: "AI/ML Engineering & Intelligent Systems Development",
+  specialization: "Software Engineering, AI/ML & RAG Systems",
   highlights: [
-    "Specializing in Computer Science, Machine Learning, and Web Application Development",
-    "Active Technical Board Member at InovX Club",
-    "Key Focus: Machine Learning, Smart Document Search, FastAPI Backends, Data Structures"
+    "Computer Science Engineering student specializing in Software Development & AI/ML",
+    "Selected Technical Board Member at InovX Club",
+    "Active in GitHub open-source contribution workflows, hackathons, and full-stack development"
   ]
 };
