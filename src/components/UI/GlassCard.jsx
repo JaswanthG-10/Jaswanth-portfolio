@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { useDeviceCapabilities } from '../../hooks/useDeviceCapabilities';
 import { useIntersectionAnimation } from '../../hooks/useIntersectionAnimation';
@@ -13,16 +13,10 @@ export const GlassCard = ({
   onClick,
   ...props
 }) => {
-  const cardRef = useRef(null);
   const { isTouch, tier, prefersReducedMotion } = useDeviceCapabilities();
-  const { ref: intersectionRef, isVisible } = useIntersectionAnimation({ threshold: 0.05 });
+  const { ref: cardRef, isVisible } = useIntersectionAnimation({ threshold: 0.05 });
 
   const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
-
-  const setRefs = (node) => {
-    cardRef.current = node;
-    intersectionRef(node);
-  };
 
   const handleMouseMove = (e) => {
     if (!enableTilt || isTouch || isMobile || tier === 'low' || prefersReducedMotion || !cardRef.current) return;
@@ -66,7 +60,7 @@ export const GlassCard = ({
 
   return (
     <motion.div
-      ref={setRefs}
+      ref={cardRef}
       initial="hidden"
       animate={isVisible ? 'visible' : 'hidden'}
       variants={prefersReducedMotion ? {} : rollInVariants}
