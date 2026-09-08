@@ -29,7 +29,7 @@ export const Hero = () => {
     <section
       id="hero"
       onMouseMove={handleMouseMove}
-      className="relative min-h-[85vh] sm:min-h-[90vh] flex items-center justify-center pt-20 sm:pt-24 pb-12 sm:pb-16 w-full max-w-full overflow-hidden z-10 select-none"
+      className="relative min-h-[70vh] sm:min-h-[80vh] flex items-center justify-center pt-16 sm:pt-20 pb-8 sm:pb-12 w-full max-w-full overflow-hidden z-10 select-none"
     >
       {/* ── Scene 1: Procedural WebGL Video Canvas (Zero-Re-Render Mouse Ref) ── */}
       <CinematicHeroVideo mouseRef={mouseRef} />
@@ -45,20 +45,20 @@ export const Hero = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full max-w-full relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
           
           {/* Left Column: Headline & Position Statement */}
-          <div className="lg:col-span-7 text-center lg:text-left space-y-5">
+          <div className="lg:col-span-7 text-center lg:text-left space-y-4">
             
-            {/* HUD Status Badge */}
+            {/* Status Badge */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold text-[#E11D48] bg-[#E11D48]/15 border border-[#E11D48]/35 shadow-cinematic-red uppercase tracking-widest"
+              className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-[11px] sm:text-xs font-bold text-[#E11D48] bg-[#E11D48]/15 border border-[#E11D48]/35 shadow-cinematic-red uppercase tracking-widest"
             >
               <Terminal className="w-3.5 h-3.5 text-[#E11D48] animate-pulse" />
-              <span>SYSTEM ONLINE • CINEMATIC EXPERIENCE • 2021 — 2026</span>
+              <span>BUILDING SOFTWARE • AI/ML • BACKEND SYSTEMS</span>
             </motion.div>
 
             {/* Name Header */}
@@ -71,66 +71,68 @@ export const Hero = () => {
               {personalInfo.name}
             </motion.h1>
 
-            {/* Headline Statement */}
+            {/* Sharper Job Positioning */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.15 }}
-              className="space-y-2"
+              className="space-y-1.5"
             >
               <h2 className="text-lg sm:text-2xl font-bold text-slate-200 tracking-tight leading-snug">
                 {personalInfo.headline}
               </h2>
-              <div className="inline-block px-3.5 py-1.5 rounded-xl bg-[#121218]/90 border border-white/15 text-xs sm:text-sm font-mono text-[#06B6D4] font-bold shadow-xs">
+              <div className="inline-block px-3.5 py-1 rounded-xl bg-[#121218]/90 border border-white/15 text-xs sm:text-sm font-mono text-[#06B6D4] font-bold shadow-xs">
                 {personalInfo.subheadline}
               </div>
             </motion.div>
 
-            {/* Concise Summary */}
+            {/* Concise Fast-to-Scan Bio */}
             <motion.p
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.22 }}
-              className="text-fluid-body text-slate-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-medium"
+              className="text-fluid-body text-slate-300 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium"
             >
               {personalInfo.shortBio}
             </motion.p>
 
-            {/* Action CTAs */}
+            {/* Structured Mobile & Desktop CTAs */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-1"
+              className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-2.5 pt-1 w-full max-w-md mx-auto lg:mx-0"
             >
               <a
                 href="#projects"
-                className="group px-6 py-3 rounded-full text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-[#E11D48] via-[#F43F5E] to-[#06B6D4] hover:opacity-95 shadow-cinematic-red flex items-center justify-center gap-2 transition-all min-h-[44px] cursor-pointer"
+                className="w-full sm:w-auto px-6 py-3 rounded-full text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-[#E11D48] via-[#F43F5E] to-[#06B6D4] hover:opacity-95 shadow-cinematic-red flex items-center justify-center gap-2 transition-all min-h-[44px] cursor-pointer"
               >
                 <Sparkles className="w-4 h-4 text-white" />
                 <span>Explore Projects</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4" />
               </a>
 
-              <a
-                href={personalInfo.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-5 py-3 rounded-full text-xs sm:text-sm font-bold text-slate-300 hover:text-white bg-[#121218] border border-white/15 hover:border-[#E11D48]/50 flex items-center justify-center gap-2 transition-all min-h-[44px] cursor-pointer"
-              >
-                <Github className="w-4 h-4" />
-                <span>GitHub</span>
-              </a>
+              <div className="grid grid-cols-2 gap-2.5 w-full sm:w-auto sm:flex sm:items-center">
+                <a
+                  href={personalInfo.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-3 rounded-full text-xs sm:text-sm font-bold text-slate-300 hover:text-white bg-[#121218] border border-white/15 hover:border-[#E11D48]/50 flex items-center justify-center gap-2 transition-all min-h-[44px] cursor-pointer"
+                >
+                  <Github className="w-4 h-4" />
+                  <span>GitHub</span>
+                </a>
 
-              <a
-                href={personalInfo.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-5 py-3 rounded-full text-xs sm:text-sm font-bold text-slate-300 hover:text-white bg-[#121218] border border-white/15 hover:border-[#06B6D4]/50 flex items-center justify-center gap-2 transition-all min-h-[44px] cursor-pointer"
-              >
-                <Linkedin className="w-4 h-4 text-[#06B6D4]" />
-                <span>LinkedIn</span>
-              </a>
+                <a
+                  href={personalInfo.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-3 rounded-full text-xs sm:text-sm font-bold text-slate-300 hover:text-white bg-[#121218] border border-white/15 hover:border-[#06B6D4]/50 flex items-center justify-center gap-2 transition-all min-h-[44px] cursor-pointer"
+                >
+                  <Linkedin className="w-4 h-4 text-[#06B6D4]" />
+                  <span>LinkedIn</span>
+                </a>
+              </div>
             </motion.div>
 
           </div>
@@ -143,10 +145,10 @@ export const Hero = () => {
               transition={{ duration: 0.6, ease: 'easeOut' }}
               className="relative w-full max-w-sm sm:max-w-md"
             >
-              <GlassCard className="p-5 sm:p-7 rounded-3xl border-2 border-white/20 bg-[#121218]/95 shadow-cinematic-card relative overflow-hidden space-y-3.5">
+              <GlassCard className="p-4 sm:p-6 rounded-3xl border-2 border-white/20 bg-[#121218]/95 shadow-cinematic-card relative overflow-hidden space-y-3">
                 
                 {/* HUD Header */}
-                <div className="flex items-center justify-between pb-3 border-b border-white/15 text-xs font-mono text-slate-400">
+                <div className="flex items-center justify-between pb-2.5 border-b border-white/15 text-xs font-mono text-slate-400">
                   <div className="flex items-center gap-2 text-[#E11D48] font-bold">
                     <Layers className="w-4 h-4 text-[#E11D48]" />
                     <span>FEATURED CASE STUDIES</span>
@@ -155,13 +157,13 @@ export const Hero = () => {
                 </div>
 
                 {/* 3 Project HUD Chips */}
-                <div className="space-y-2.5">
+                <div className="space-y-2">
                   <a
                     href="#hackathons"
-                    className="p-3 rounded-2xl bg-[#0A0A0C] border border-white/15 flex items-center justify-between group hover:border-[#E11D48]/60 transition-all min-h-[48px]"
+                    className="p-2.5 rounded-2xl bg-[#0A0A0C] border border-white/15 flex items-center justify-between group hover:border-[#E11D48]/60 transition-all min-h-[44px]"
                   >
-                    <div className="flex items-center gap-3">
-                      <ShieldCheck className="w-5 h-5 text-[#E11D48] shrink-0" />
+                    <div className="flex items-center gap-2.5">
+                      <ShieldCheck className="w-4 h-4 text-[#E11D48] shrink-0" />
                       <div>
                         <div className="text-xs font-bold text-white group-hover:text-[#F43F5E] transition-colors">ClaimProof AI</div>
                         <div className="text-[10px] font-mono text-slate-400">Motor Claim Evidence Reviewer</div>
@@ -172,10 +174,10 @@ export const Hero = () => {
 
                   <a
                     href="#projects"
-                    className="p-3 rounded-2xl bg-[#0A0A0C] border border-white/15 flex items-center justify-between group hover:border-[#06B6D4]/60 transition-all min-h-[48px]"
+                    className="p-2.5 rounded-2xl bg-[#0A0A0C] border border-white/15 flex items-center justify-between group hover:border-[#06B6D4]/60 transition-all min-h-[44px]"
                   >
-                    <div className="flex items-center gap-3">
-                      <Code2 className="w-5 h-5 text-[#06B6D4] shrink-0" />
+                    <div className="flex items-center gap-2.5">
+                      <Code2 className="w-4 h-4 text-[#06B6D4] shrink-0" />
                       <div>
                         <div className="text-xs font-bold text-white group-hover:text-[#06B6D4] transition-colors">Iris AI / DocuMind</div>
                         <div className="text-[10px] font-mono text-slate-400">RAG Document Intelligence</div>
@@ -186,10 +188,10 @@ export const Hero = () => {
 
                   <a
                     href="#projects"
-                    className="p-3 rounded-2xl bg-[#0A0A0C] border border-white/15 flex items-center justify-between group hover:border-[#6366F1]/60 transition-all min-h-[48px]"
+                    className="p-2.5 rounded-2xl bg-[#0A0A0C] border border-white/15 flex items-center justify-between group hover:border-[#6366F1]/60 transition-all min-h-[44px]"
                   >
-                    <div className="flex items-center gap-3">
-                      <Film className="w-5 h-5 text-[#6366F1] shrink-0" />
+                    <div className="flex items-center gap-2.5">
+                      <Film className="w-4 h-4 text-[#6366F1] shrink-0" />
                       <div>
                         <div className="text-xs font-bold text-white group-hover:text-[#6366F1] transition-colors">Lumina AI</div>
                         <div className="text-[10px] font-mono text-slate-400">Movie Recommendation Engine</div>
@@ -202,7 +204,7 @@ export const Hero = () => {
                 {/* Academic Tag */}
                 <div className="pt-2 flex items-center justify-between text-[11px] text-slate-400 border-t border-white/15 font-mono">
                   <span>CSE @ Rajalakshmi Eng. College</span>
-                  <span className="text-[#06B6D4] font-bold">2021 — 2026</span>
+                  <span className="text-[#06B6D4] font-bold">Expected 2029</span>
                 </div>
 
               </GlassCard>

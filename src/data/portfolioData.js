@@ -11,9 +11,9 @@ export const navLinks = [
 export const personalInfo = {
   name: "Jaswanth G.",
   fullName: "Jaswanth G",
-  headline: "Computer Science Student | Software Development & AI/ML",
-  subheadline: "Python • React • FastAPI • RAG • SQL",
-  shortBio: "CSE student at Rajalakshmi Engineering College actively building toward Software Engineering & AI/ML Engineering—combining production software engineering, RAG pipelines, REST APIs, and full-stack web applications.",
+  headline: "Computer Science Student",
+  subheadline: "Software Engineering • AI/ML",
+  shortBio: "CSE student building AI/ML and software projects with Python, FastAPI, React, RAG and modern backend systems.",
   location: "Chennai, Tamil Nadu, India",
   institution: "Rajalakshmi Engineering College, Chennai",
   graduationYear: "2029",
