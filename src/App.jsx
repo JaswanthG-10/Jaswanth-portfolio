@@ -4,7 +4,6 @@ import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
 import { Projects } from './components/Projects';
-import { ClaimProofSection } from './components/ClaimProofSection';
 import { Hackathons } from './components/Hackathons';
 import { Skills } from './components/Skills';
 import { Experience } from './components/Experience';
@@ -22,12 +21,11 @@ export default function App() {
       {/* Floating Cinematic Navbar */}
       <Navbar />
 
-      {/* Main Portfolio Layout: Hero -> About -> Projects -> ClaimProof -> Hackathons -> Skills -> Experience -> Education -> Contact */}
+      {/* Main Portfolio Layout: Hero -> About -> Projects -> Hackathons -> Skills -> Experience -> Education -> Contact */}
       <main className="relative z-10 space-y-4 w-full max-w-full overflow-hidden">
         <Hero />
         <About />
         <Projects />
-        <ClaimProofSection />
         <Hackathons />
         <Skills />
         <Experience />

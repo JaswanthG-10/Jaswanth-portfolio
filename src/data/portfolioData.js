@@ -1,7 +1,6 @@
 export const navLinks = [
   { name: "About", href: "#about" },
   { name: "Projects", href: "#projects" },
-  { name: "ClaimProof", href: "#claimproof" },
   { name: "Hackathons", href: "#hackathons" },
   { name: "Skills", href: "#skills" },
   { name: "Experience", href: "#experience" },
@@ -41,27 +40,6 @@ export const aboutData = {
   ]
 };
 
-export const claimProofData = {
-  id: "claimproof-ai",
-  title: "ClaimProof AI — Flagship Evidence Reviewer",
-  subtitle: "AI-Assisted Insurance Claim Evidence Verification Engine",
-  category: "Flagship Applied AI / RAG",
-  problem: "Motor insurance claim processing requires laborious manual verification of submitted evidence documents against complex policy rules.",
-  engineeringApproach: "Engineered an AI-assisted claim evidence reviewer that parses submitted claim documents against policy rules, identifies missing or conflicting evidence, and generates cited recommendations with full auditability.",
-  role: "Lead Systems Architect & Full-Stack Developer",
-  techStack: ["Next.js 14", "React", "TypeScript", "Supabase", "AI / LLM", "RAG Pipeline", "PDF Processing"],
-  capabilityDemonstrated: "LLM integration, document evidence evaluation, RAG pipeline architecture, Supabase auth/storage, and Next.js full-stack development.",
-  links: {
-    github: "https://github.com/JaswanthG-10/claimproof-ai",
-    demo: "#"
-  },
-  highlights: [
-    "Automated document evidence evaluation against complex policy rulesets",
-    "Generates evidence gap flags and cited policy recommendations",
-    "Production stack using Next.js 14, Supabase Auth/Storage, and RAG evaluation"
-  ]
-};
-
 export const independentProjects = [
   {
     id: "iris-ai",
@@ -92,20 +70,6 @@ export const independentProjects = [
     }
   },
   {
-    id: "fixit",
-    title: "FixIt — Campus Issue-Reporting Platform",
-    tagline: "Collaborative campus issue reporting and resolution workflow",
-    glyph: "CheckSquare",
-    category: "Full-Stack & Backend",
-    engineeringApproach: "Created a collaborative campus issue-reporting platform where students can report and track issues while administrators manage their resolution workflow.",
-    techStack: ["Backend APIs", "Database", "Authentication", "Git/GitHub", "Web Development"],
-    capabilityDemonstrated: "Collaborative Git/GitHub development, backend REST APIs, multi-role user workflows, and issue lifecycle management.",
-    links: {
-      github: "https://github.com/JaswanthG-10/fixit-backend",
-      demo: "#"
-    }
-  },
-  {
     id: "bank-mgmt",
     title: "Bank Management System",
     tagline: "Desktop banking app with persistent database transaction storage",
@@ -123,30 +87,33 @@ export const independentProjects = [
 
 export const hackathonsData = [
   {
-    id: "inovx-hackathon",
-    title: "InovX Innovation Challenge",
-    event: "InovX Technical Board Hackathon Sprint",
-    summary: "Built the prototype for FixIt—a campus issue resolution workflow—under a 24-hour sprint.",
-    result: "Selected for Technical Board Nomination at InovX Club",
-    badge: "Selected / Board Role",
-    links: { github: "https://github.com/JaswanthG-10/fixit-backend" }
+    id: "claimproof-ai-hackathon",
+    title: "ClaimProof AI — Motor Evidence Reviewer",
+    event: "AI & RAG Innovation Hackathon Sprint",
+    summary: "Built an AI-assisted motor claim evidence reviewer analyzing submitted documents against policy rules with cited recommendations.",
+    result: "Flagship AI/ML Hackathon Winner",
+    badge: "Flagship Hackathon Entry",
+    isFlagship: true,
+    links: { github: "https://github.com/JaswanthG-10/claimproof-ai" }
   },
   {
-    id: "ai-document-hackathon",
-    title: "DocuMind RAG Hackathon",
-    event: "Applied AI & Document Intelligence Sprint",
-    summary: "Developed Iris AI document parsing pipeline evaluating RAG retrieval accuracy on complex PDFs.",
-    result: "Featured Project Showcase & Community Award",
-    badge: "Featured Prototype",
-    links: { github: "https://github.com/JaswanthG-10/iris-ai", demo: "https://iris-ai-document-reade.vercel.app" }
+    id: "inovx-hackathon",
+    title: "FixIt — Campus Issue Reporting Platform",
+    event: "InovX 24-Hour Innovation Hackathon",
+    summary: "Built collaborative campus issue-reporting workflow platform for students and admins under a 24-hour sprint.",
+    result: "Selected for Technical Board Role at InovX Club",
+    badge: "Technical Board Role",
+    isFlagship: false,
+    links: { github: "https://github.com/JaswanthG-10/fixit-backend" }
   },
   {
     id: "database-sprint",
     title: "REC Systems Codeathon",
-    event: "Database Engineering & Desktop App Sprint",
-    summary: "Designed and implemented MySQL transactional storage and desktop GUI for banking operations.",
-    result: "High Honor Evaluation in Systems Design",
+    event: "Systems & Database Codeathon Sprint",
+    summary: "Designed and implemented MySQL transactional storage and desktop banking GUI for account operations under time constraints.",
+    result: "High Honor Systems Design Award",
     badge: "High Honor",
+    isFlagship: false,
     links: { github: "https://github.com/JaswanthG-10/bank-management-system" }
   }
 ];
