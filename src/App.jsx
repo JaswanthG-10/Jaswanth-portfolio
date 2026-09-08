@@ -1,6 +1,5 @@
 import React from 'react';
 import { BackgroundParticles } from './components/BackgroundParticles';
-import { BackgroundMusicPlayer } from './components/BackgroundMusicPlayer';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
@@ -18,9 +17,6 @@ export default function App() {
       
       {/* Background Particles */}
       <BackgroundParticles />
-
-      {/* Intro Background Music Player: "The One" by Sai Abhyankkar */}
-      <BackgroundMusicPlayer />
 
       {/* Floating Cinematic Navbar */}
       <Navbar />
