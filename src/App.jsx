@@ -3,8 +3,10 @@ import { BackgroundParticles } from './components/BackgroundParticles';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
-import { Skills } from './components/Skills';
 import { Projects } from './components/Projects';
+import { ClaimProofSection } from './components/ClaimProofSection';
+import { Hackathons } from './components/Hackathons';
+import { Skills } from './components/Skills';
 import { Experience } from './components/Experience';
 import { Education } from './components/Education';
 import { Contact } from './components/Contact';
@@ -20,12 +22,14 @@ export default function App() {
       {/* Floating Cinematic Navbar */}
       <Navbar />
 
-      {/* Main Cinematic Portfolio Experience */}
+      {/* Main Portfolio Layout: Hero -> About -> Projects -> ClaimProof -> Hackathons -> Skills -> Experience -> Education -> Contact */}
       <main className="relative z-10 space-y-4 w-full max-w-full overflow-hidden">
         <Hero />
         <About />
-        <Skills />
         <Projects />
+        <ClaimProofSection />
+        <Hackathons />
+        <Skills />
         <Experience />
         <Education />
         <Contact />

@@ -7,7 +7,8 @@ export const BackgroundParticles = () => {
 
   useEffect(() => {
     // Disable canvas particle loop completely on mobile/low-tier screens to guarantee zero main-thread scroll lag
-    if (window.innerWidth < 768 || tier === 'low' || prefersReducedMotion) {
+    const isCoarse = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+    if (window.innerWidth < 768 || tier === 'low' || prefersReducedMotion || isCoarse) {
       return;
     }
 
@@ -92,7 +93,8 @@ export const BackgroundParticles = () => {
     };
   }, [tier, particleLimit, prefersReducedMotion]);
 
-  if (typeof window !== 'undefined' && (window.innerWidth < 768 || tier === 'low' || prefersReducedMotion)) {
+  const isCoarse = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+  if (typeof window !== 'undefined' && (window.innerWidth < 768 || tier === 'low' || prefersReducedMotion || isCoarse)) {
     return null;
   }
 

@@ -157,7 +157,7 @@ export const Hero = () => {
                 {/* 3 Project HUD Chips */}
                 <div className="space-y-2.5">
                   <a
-                    href="#projects"
+                    href="#claimproof"
                     className="p-3 rounded-2xl bg-[#0A0A0C] border border-white/15 flex items-center justify-between group hover:border-[#E11D48]/60 transition-all min-h-[48px]"
                   >
                     <div className="flex items-center gap-3">
